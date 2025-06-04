@@ -7,7 +7,6 @@ renv/*
 **/data/**/*.csv
 **/data/**/*.csv
 
-
 ##### NÃO IGNORAR
 
 !**/data/processed/cnpj*.json
