@@ -71,19 +71,19 @@ theme_custom(
   title.y = "Quantidade de Projetos"
 )
 
-# PRINCIPAIS UNIVERSIDADES ----
+# PRINCIPAIS FUNDAÇÕES  ----
 # tipo de fundação publica
 base_mcti_request |>
-  dplyr::select(natureza_juridica) |>
+  dplyr::select(natureza_juridica, razao_social.y) |>
   dplyr::filter(
     stringr::str_detect(natureza_juridica, "Fundação Pública")
   ) |>
-    dplyr::count(natureza_juridica) |>
-      dplyr::arrange(desc(n)) |>
-      View()
+  dplyr::count(razao_social.y) |>
+  dplyr::arrange(desc(n)) |>
+  View()
 
 
-# nomes  .vndfçhdfzvnzd.f
+# nomes da fundação (publica ou privada)
 base_mcti_request |>
   dplyr::select(razao_social.y) |>
   dplyr::filter(
