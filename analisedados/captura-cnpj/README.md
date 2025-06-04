@@ -9,7 +9,7 @@ Abaixo está a estrutura principal do projeto e a descrição de cada pasta:
 ```
 .
 ├── config/          # Configurações e scripts de setup do projeto
-├── data/            # Dados utilizados no projeto
+├── data/            # Dados utilizados no Projeto
 │   ├── processed/   # Dados processados
 │   └── raw/         # Dados brutos
 ├── renv/            # Configuração do ambiente R gerenciado pelo renv

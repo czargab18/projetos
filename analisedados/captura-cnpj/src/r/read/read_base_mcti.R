@@ -1,4 +1,6 @@
 # SETUP IMPORT base_mcti ----
+
+use("readxl", c("read_xlsx"))
 library(readxl)
 
 base_mcti <-

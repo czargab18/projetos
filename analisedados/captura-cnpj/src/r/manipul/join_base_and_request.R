@@ -13,21 +13,30 @@
 # SET UP PACKAGES ----
 use("dplyr", c("full_join"))
 
+library(dplyr)
+
 # CARREGAR BASES ----
 source("src/r/read/read_base_mcti.R")
 source("src/r/read/read_request.R")
 
 # JUNTAR BASES ----
-base_mcti_request <- dplyr::full_join(
+base_mcti_request <- dplyr::right_join(
   x = base_mcti,
   y = base_request,
   by = c("cnpj_dispendio" = "cnpj")
 ) |>
   dplyr::mutate_all(as.character)
 
+# View(base_mcti_request[23:26, ])
+
 # SALVANDO BASE COMPLETA ----
-write.csv(
+# usar separador ";"
+write.table(
   x = base_mcti_request,
   file = "data/processed/base_mcti_request.csv",
-  row.names = FALSE
+  sep = ";",
+  row.names = FALSE,
+  col.names = TRUE,
+  quote = TRUE,
+  fileEncoding = "UTF-8"
 )
