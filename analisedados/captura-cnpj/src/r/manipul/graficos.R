@@ -1,5 +1,6 @@
 # Configurando outros repositórios.
 source("src/r/manipul/join_base_and_request.R")
+source("src/r/manipul/manipulacao.R")
 
 library(dplyr)
 library(ggplot2)
