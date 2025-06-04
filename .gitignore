@@ -5,7 +5,7 @@
 renv/*
 **/data/**/*.xlsx
 **/data/**/*.csv
-**/data/**/*.csv
+**/data/**/*.txt
 
 ##### NÃO IGNORAR
 
