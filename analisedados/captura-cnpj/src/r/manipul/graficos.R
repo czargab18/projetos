@@ -52,6 +52,43 @@ base_mcti_request |>
 
 theme_custom(
   plot_tipo,
-  title = "Tipos de Parcerias em projetos de P,D&I",
+  title = "União Federativa dass parcerias em projetos de P,D&I",
   title.y = "Quantidade de Projetos"
 )
+
+
+regiao_dispendio <-
+base_mcti_request |>
+  dplyr::count(regiao_dispendio) |>
+  dplyr::mutate(regiao_dispendio = factor(regiao_dispendio, levels = regiao_dispendio[order(n)])) |>
+  ggplot(aes(x = regiao_dispendio, y = n)) +
+  geom_bar(stat = "identity") +
+  coord_flip()
+
+theme_custom(
+  regiao_dispendio,
+  title = "Regiao dos parceiros em projetos de P,D&I",
+  title.y = "Quantidade de Projetos"
+)
+
+# PRINCIPAIS UNIVERSIDADES ----
+# tipo de fundação publica
+base_mcti_request |>
+  dplyr::select(natureza_juridica) |>
+  dplyr::filter(
+    stringr::str_detect(natureza_juridica, "Fundação Pública")
+  ) |>
+    dplyr::count(natureza_juridica) |>
+      dplyr::arrange(desc(n)) |>
+      View()
+
+
+# nomes  .vndfçhdfzvnzd.f
+base_mcti_request |>
+  dplyr::select(razao_social.y) |>
+  dplyr::filter(
+    stringr::str_detect(razao_social.y, "FUNDACAO (UNIVERSIDADE|FACULDADE)")
+  ) |>
+  dplyr::count(razao_social.y) |>
+  dplyr::arrange(desc(n))  |>
+  View()
