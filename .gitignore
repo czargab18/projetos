@@ -1,0 +1,16 @@
+###########################################
+#################### R ####################
+###########################################
+##### IGNORAR
+renv/*
+**/data/**/*.xlsx
+**/data/**/*.csv
+**/data/**/*.csv
+
+
+##### NÃO IGNORAR
+
+!**/data/processed/cnpj*.json
+!**/renv/activate.R
+!.Rprofile
+!renv.lock

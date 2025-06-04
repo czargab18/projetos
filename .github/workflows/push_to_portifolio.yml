@@ -1,0 +1,50 @@
+name: Enviar Projetos para Portfólio
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 27 9 1'
+    - cron: '0 0 27 2 1'
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntontu-latest
+    steps:
+      - name: Checar Repositório
+        uses: actions/checkout@v4
+        with:
+          repository: '${{ github.repository }}'
+          token: '${{ github.token }}'
+          path: './'
+          fetch-depth: '0'
+
+      - name: Set up Git config
+        run: |
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Clone portifolio repo
+        env:
+          GH_TOKEN: ${{ secrets.PORTIFOLIO_TOKEN }}
+        run: |
+          git clone https://x-access-token:${GH_TOKEN}@github.com/cesargabrielphd/portifolio.git portifolio
+
+      - name: Copy files
+        run: |
+          rsync -av --exclude='.git' ./ ./portifolio/projetos/
+
+      - name: Commit and push to portifolio
+        env:
+          GH_TOKEN: ${{ secrets.PORTIFOLIO_TOKEN }}
+        run: |
+          cd portifolio
+          git add projetos
+          if git diff-index --quiet HEAD; then
+            echo "No changes to commit"
+          else
+            git commit -m "Sync from projetos repo [auto]"
+            git push https://x-access-token:${GH_TOKEN}@github.com/cesargabrielphd/portifolio.git main
+          fi

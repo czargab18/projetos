@@ -1,0 +1,668 @@
+main {
+  margin: 0 auto;
+  max-width: 1180px;
+  min-height: 280px;
+  height: 505px;
+  position: relative;
+  overflow: hidden;
+}
+
+main .form {
+  float: left;
+  width: 460px;
+  position: relative;
+  z-index: 30;
+  margin-left: 90px;
+  margin-top: 60px;
+}
+main .form h1 {
+  font: normal 35px/40px "MoskMedium500";
+  color: #232323;
+  letter-spacing: -0.035em;
+}
+main .form h1 b {
+  font: normal 35px/40px "MoskExtraBold800";
+}
+main .form h1 b:nth-of-type(1) {
+  color: #9e507c;
+}
+main .form h1 b:nth-of-type(2) {
+  color: #4267b2;
+}
+main .form h1 b:nth-of-type(3) {
+  color: #cc382d;
+}
+
+main .form form {
+  width: 410px;
+  margin: 22px 0px;
+  position: relative;
+}
+main .form form input {
+  width: 100%;
+  background: #ebebeb;
+  border: solid 1px #d4d4d4;
+  box-shadow: none;
+  font-size: 16px;
+  color: #2e2e2e;
+  border-radius: 4px;
+  line-height: 45px;
+  padding: 1px 12px 0px 14px;
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: 400;
+  font-family: "Open Sans";
+  transition: all 0.5s ease;
+}
+main .form form input:focus {
+  background: #ffffff;
+  border: solid 1px #2a2a2a;
+}
+main .form form .btn {
+  background: #e1482d;
+  border: none;
+  color: #ffffff;
+  border-radius: 4px;
+  font: 700 16px "Open Sans";
+  text-transform: uppercase;
+  text-decoration: none;
+  width: 100%;
+  line-height: 46px;
+  letter-spacing: -0.02em;
+  display: block;
+  margin-top: 8px;
+  box-shadow: 9px 19px 33px -17px rgba(0, 0, 0, 0.4);
+  transition: all 0.5s ease;
+  text-align: center;
+  cursor: pointer;
+}
+main .form form .btn:hover {
+  filter: brightness(115%);
+  box-shadow: 9px 19px 33px -17px rgba(0, 0, 0, 0.8);
+}
+
+main .form form .enviando {
+  color: #5d5e5a;
+  font: 700 13px/18px "Open Sans";
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  margin: 10px 0px 0px 0px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+main .form h3 {
+  margin: 22px auto 0 auto;
+  font: 700 14px "Open Sans";
+  font-style: italic;
+  color: #d2d4d5;
+  width: 175px;
+  text-align: center;
+  border-top: solid 2px #e5e5e5;
+  text-transform: uppercase;
+  padding-top: 5px;
+  transition: all 0.5s ease;
+}
+
+main .form:hover h3 {
+  color: #666666;
+  width: 220px;
+}
+
+main .tvCaptura {
+  position: absolute;
+  width: 1146px;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+main .tvCaptura .faixa {
+  height: 36px;
+  background: #2d2d2d;
+  color: #ffffff;
+  font: 600 15px/36px "Open Sans";
+  text-transform: uppercase;
+  padding: 0px 10px 0px 13px;
+  width: 130px;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0px;
+  top: 276px;
+  z-index: 37;
+  letter-spacing: -0.03em;
+}
+main .tvCaptura .faixa span {
+  display: block;
+  position: absolute;
+  left: -10px;
+  width: 10px;
+  top: 0px;
+}
+main .tvCaptura .faixa span svg polygon {
+  fill: #2d2d2d;
+}
+
+main .tvCaptura .captura {
+  width: 1146px;
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  user-select: none;
+}
+main .tvCaptura .imagemProfessor {
+  width: 509px;
+  position: absolute;
+  top: 6px;
+  right: 22px;
+  z-index: 35;
+  user-select: none;
+}
+
+main .tvCaptura .detalhesAnimados {
+  position: absolute;
+  width: 509px;
+  height: 307px;
+  right: 22px;
+  top: 69px;
+  border-radius: 7px;
+  overflow: hidden;
+}
+main .tvCaptura .grupoDesenhos {
+  position: absolute;
+  width: 21px;
+  height: 307px;
+  top: 0px;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+._1000 main .tvCaptura .grupoDesenhos {
+  animation-name: quadroAnimado;
+}
+._320 main .tvCaptura .grupoDesenhos {
+  animation-name: quadroAnimadoMobile;
+}
+
+main .tvCaptura .grupoDesenhos.desenhosEsquerda {
+  left: 11px;
+  z-index: 34;
+}
+main .tvCaptura .grupoDesenhos.desenhosDireita {
+  right: 24px;
+  z-index: 36;
+}
+main .tvCaptura .detalhesAnimados .itemDesenho {
+  width: 34px;
+  background: transparent;
+  float: left;
+  margin-bottom: 12px;
+}
+
+@keyframes quadroAnimado {
+  from {
+    top: 0px;
+  }
+  to {
+    top: -166px;
+  }
+}
+@keyframes quadroAnimadoMobile {
+  from {
+    top: 0px;
+  }
+  to {
+    top: -186px;
+  }
+}
+
+.chamadas {
+  padding: 60px 0px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.chamadas .barraBrancaMesa {
+  width: 1137px;
+  top: -21px;
+  left: calc(50% - 2px);
+  background: #ffffff;
+  border: solid 5px #f0f0f0;
+  position: absolute;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  height: 34px;
+  box-shadow: 0px 14px 17px -13px rgba(0, 0, 0, 0.5);
+}
+.chamadas ul {
+  width: 994px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chamadas ul li {
+  position: relative;
+  padding-left: 70px;
+  padding-right: 30px;
+  margin-right: 30px;
+}
+.chamadas ul li img {
+  width: 54px;
+  position: absolute;
+  left: 0px;
+  top: 7px;
+}
+.chamadas ul li:last-of-type {
+  padding-right: 0px;
+  margin-right: 0px;
+}
+.chamadas ul li p {
+  text-align: left;
+  color: #ffffff;
+  font: 400 15px/22px "Open Sans";
+}
+.chamadas ul li p b {
+  font-weight: 700;
+}
+.chamadas ul li::after {
+  content: "";
+  display: block;
+  width: 2px;
+  height: 25px;
+  background: #000000;
+  opacity: 0.2;
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.chamadas ul li:last-of-type::after {
+  display: none;
+}
+
+.participeSobre {
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+}
+.participeSobre .participe {
+  width: 53%;
+  box-sizing: border-box;
+  padding-right: 40px;
+  position: relative;
+  padding-top: 50px;
+  padding-bottom: 90px;
+}
+.participeSobre .participe .lampada {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  user-select: none;
+}
+.participeSobre .participe .lampada .lamp {
+  width: 175px;
+  right: 5px;
+  bottom: -7px;
+  position: absolute;
+  z-index: 20;
+}
+.participeSobre .participe .lampada .copo {
+  width: 52px;
+  position: absolute;
+  right: 130px;
+  bottom: -7px;
+  z-index: 20;
+}
+.participeSobre .participe .lampada::after {
+  content: "";
+  display: block;
+  width: 69px;
+  bottom: -6px;
+  right: 14px;
+  background: #ffffff;
+  position: absolute;
+  height: 24px;
+  box-shadow: 0px 6px 8px -3px rgba(0, 0, 0, 0.4);
+  z-index: 19;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.participeSobre .participe .lampada::before {
+  content: "";
+  display: block;
+  width: 43px;
+  bottom: -6px;
+  right: 135px;
+  background: #ffffff;
+  position: absolute;
+  height: 16px;
+  box-shadow: 0px 6px 8px -3px rgba(0, 0, 0, 0.4);
+  z-index: 19;
+}
+
+.participeSobre .participe h2 {
+  font: normal 24px/30px "MoskMedium500";
+  letter-spacing: -0.015em;
+  color: #2b3a48;
+}
+.participeSobre .participe h2 b {
+  font: normal 24px/30px "MoskExtraBold800";
+  color: #e12d41;
+}
+.participeSobre .participe::before {
+  content: "";
+  display: block;
+  width: 2px;
+  height: 160px;
+  background: #f0f0f0;
+  position: absolute;
+  right: 0px;
+  top: 55px;
+}
+
+.participeSobre .participe p {
+  width: 300px;
+  font: normal 15px/25px "Open Sans";
+  color: #858585;
+  letter-spacing: -0.02em;
+  padding-top: 20px;
+}
+
+.participeSobre .sobre {
+  width: 47%;
+  box-sizing: border-box;
+  padding-left: 40px;
+  padding-top: 49px;
+}
+.participeSobre .sobre p {
+  width: 205px;
+  font: normal 15px/25px "Open Sans";
+  color: #2c3a44;
+  letter-spacing: -0.05em;
+  float: left;
+}
+.participeSobre .sobre h3 {
+  font: normal 20px/30px "MoskLight300";
+  color: #435768;
+  text-transform: uppercase;
+  clear: left;
+  float: left;
+  margin-top: 23px;
+  letter-spacing: -0.03em;
+}
+.participeSobre .sobre h3 b {
+  font: 600 24px/27px "Open Sans";
+  float: left;
+  margin-right: 6px;
+  color: #e12d41;
+}
+
+.participeSobre .sobre .imagem {
+  float: right;
+  padding-top: 8px;
+  user-select: none;
+}
+
+.participeSobre .sobre .imagem .redes {
+  width: 100%;
+  position: relative;
+  height: 25px;
+  margin-top: 10px;
+}
+.participeSobre .sobre .imagem .redes::before {
+  content: "";
+  display: block;
+  width: 92px;
+  height: 2px;
+  background: #f0f0f0;
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.participeSobre .sobre .imagem .redes a:link,
+.participeSobre .sobre .imagem .redes a:active,
+.participeSobre .sobre .imagem .redes a:visited {
+  display: block;
+  float: right;
+  font: bold 15px/35px "Open Sans";
+  color: #d4d4d4;
+  transition: all 0.5s ease;
+  width: 20px;
+  margin-left: 7px;
+}
+.participeSobre .sobre .imagem .redes a svg path {
+  fill: #e0e0e0;
+  transition: all 0.5s ease;
+}
+
+.participeSobre .sobre .imagem .redes a:hover:nth-of-type(3) svg path {
+  fill: #4267b2;
+}
+.participeSobre .sobre .imagem .redes a:hover:nth-of-type(2) svg path {
+  fill: #cc382d;
+}
+.participeSobre .sobre .imagem .redes a:hover:nth-of-type(1) svg path {
+  fill: #9e507c;
+}
+
+/* RESPONSIVIDADE */
+
+._320 main {
+  max-width: 480px;
+  min-width: 320px;
+  height: initial;
+  min-height: initial;
+}
+._320 main .form {
+  margin: 0px auto;
+  float: initial;
+  text-align: center;
+  padding: 25px 20px 0px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+._320 main .form h1 {
+  font: normal 24px/30px "MoskMedium500";
+  letter-spacing: -0.04em;
+}
+._320 main .form h1 b {
+  font: normal 24px/30px "MoskExtraBold800";
+}
+._320 main .form form {
+  max-width: 400px;
+  min-width: 280px;
+  margin: 15px auto;
+  width: 100%;
+}
+
+._320 main .tvCaptura {
+  position: relative;
+  width: 320px;
+  top: initial;
+  left: initial;
+  transform: none;
+  margin: 40px auto 0 auto;
+}
+._320 main .tvCaptura .captura {
+  width: 320px;
+  position: relative;
+  top: initial;
+  left: initial;
+}
+._320 main .tvCaptura .imagemProfessor {
+  width: 245px;
+  position: absolute;
+  top: -20px;
+  right: 37px;
+  z-index: 35;
+}
+._320 main .tvCaptura .detalhesAnimados {
+  width: 245px;
+  height: 148px;
+  right: 37px;
+  top: 10px;
+  border-radius: 5px;
+}
+._320 main .tvCaptura .detalhesAnimados .itemDesenho {
+  width: 18px;
+  margin-bottom: 6px;
+}
+._320 main .tvCaptura .grupoDesenhos.desenhosDireita {
+  right: 5px;
+}
+._320 main .tvCaptura .grupoDesenhos.desenhosEsquerda {
+  left: 8px;
+}
+
+._320 .chamadas {
+  padding: 30px 0px 10px;
+}
+._320 .chamadas .barraBrancaMesa {
+  display: none;
+}
+._320 .chamadas ul {
+  display: block;
+  width: 255px;
+  margin: 0 auto;
+}
+._320 .chamadas ul li {
+  margin-bottom: 30px;
+  padding-right: 0px;
+  margin-right: 0px;
+}
+._320 .chamadas ul li::after {
+  display: none;
+}
+._320 .chamadas ul li p {
+  font-size: 13px;
+  padding-top: 5px;
+}
+._320 .chamadas h3 {
+  font: bold 14px/20px "Open Sans";
+  font-style: italic;
+  color: #a5b3be;
+  text-align: center;
+  text-transform: uppercase;
+  padding-bottom: 20px;
+}
+._320 .chamadas h3 b {
+  color: #d9e3ec;
+}
+
+._320 .participeSobre {
+  max-width: 480px;
+  min-width: 320px;
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+._320 .participeSobre .participe::before {
+  display: none;
+}
+._320 .participeSobre .participe {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 20px;
+}
+._320 .participeSobre .participe p {
+  width: 100%;
+  padding-top: 15px;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  line-height: 24px;
+}
+
+._320 .participeSobre .participe h2 {
+  font: normal 20px/25px "MoskMedium500";
+}
+._320 .participeSobre .participe h2 b {
+  font: normal 20px/25px "MoskExtraBold800";
+}
+
+._320 .participeSobre .sobre {
+  width: 100%;
+  padding: 0px;
+}
+._320 .participeSobre .sobre .imagem {
+  float: initial;
+  padding-top: 0px;
+}
+._320 .participeSobre .sobre .imagem .redes {
+  width: 180px;
+  margin: 0 auto;
+  height: initial;
+}
+._320 .participeSobre .sobre .imagem .redes::before {
+  display: none;
+}
+
+._320 .participeSobre .sobre .imagem .redes a:link,
+._320 .participeSobre .sobre .imagem .redes a:active,
+._320 .participeSobre .sobre .imagem .redes a:visited {
+  display: inline-block;
+  /* float: initial; */
+  margin: 12px 5px 15px 6px;
+  width: 25px;
+  height: 25px;
+}
+
+._320 .participeSobre .sobre p {
+  width: 100%;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  line-height: 24px;
+}
+._320 .participeSobre .sobre p b {
+  font-weight: 700;
+}
+._320 .participeSobre .sobre p br {
+  display: none;
+}
+._320 .participeSobre .sobre h3 {
+  clear: initial;
+  /* float: initial; */
+  display: inline-block;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+/* CORES */
+main .form h1 b {
+  color: #3d576c;
+}
+.chamadas {
+  background: #3d576c;
+}
+.participeSobre .participe h2 span {
+  color: #3d576c;
+}
+.participeSobre .sobre .imagem .redes a:hover {
+  color: #3d576c;
+}
+
+/*
+     FILE ARCHIVED ON 03:57:45 May 31, 2021 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 01:06:16 Jan 01, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 1.801
+  exclusion.robots: 0.026
+  exclusion.robots.policy: 0.011
+  esindex: 0.013
+  cdx.remote: 168.964
+  LoadShardBlock: 121.098 (3)
+  PetaboxLoader3.datanode: 143.782 (4)
+  load_resource: 132.068
+  PetaboxLoader3.resolve: 103.921
+*/
