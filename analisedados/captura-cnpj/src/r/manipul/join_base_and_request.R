@@ -31,12 +31,12 @@ base_mcti_request <- dplyr::right_join(
 
 # SALVANDO BASE COMPLETA ----
 # usar separador ";"
-write.table(
-  x = base_mcti_request,
-  file = "data/processed/base_mcti_request.csv",
-  sep = ";",
-  row.names = FALSE,
-  col.names = TRUE,
-  quote = TRUE,
-  fileEncoding = "UTF-8"
-)
+# write.table(
+#   x = base_mcti_request,
+#   file = "data/processed/base_mcti_request.csv",
+#   sep = ";",
+#   row.names = FALSE,
+#   col.names = TRUE,
+#   quote = TRUE,
+#   fileEncoding = "UTF-8"
+# )
