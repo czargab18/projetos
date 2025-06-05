@@ -66,3 +66,8 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar
 ## Licença
 
 Este projeto está sob a licença MIT.
+
+
+Melhorias do projeto
+
+https://www.datanovia.com/pt/learn/tools/r-in-vscode/recommended-vscode-configurations-for-r-programming.html
