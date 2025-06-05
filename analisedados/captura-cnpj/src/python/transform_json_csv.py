@@ -1,3 +1,7 @@
+# ALGUMAS COLUNAS DA RESPOSTA DA API NÃO SERÃO SALVAS PELO TAMANHO DA RESPOSTA:
+# - Regime Tributário
+# - QSA
+
 import json
 import pandas as pd
 
@@ -55,27 +59,27 @@ for cnpj, info in data.items():
         "Código Porte": info.get("codigo_porte"),
         "Porte": info.get("porte"),
         "Ente Federativo Responsável": info.get("ente_federativo_responsavel"),
-        "Regime Tributário": info.get("regime_tributario"),
-        # Lista de listas para QSA
-        "QSA": [
-            [
-                socio.get("identificador_de_socio"),
-                socio.get("nome_socio"),
-                socio.get("cnpj_cpf_do_socio"),
-                socio.get("codigo_qualificacao_socio"),
-                socio.get("qualificacao_socio"),
-                socio.get("data_entrada_sociedade"),
-                socio.get("codigo_pais"),
-                socio.get("pais"),
-                socio.get("cpf_representante_legal"),
-                socio.get("nome_representante_legal"),
-                socio.get("codigo_qualificacao_representante_legal"),
-                socio.get("qualificacao_representante_legal"),
-                socio.get("codigo_faixa_etaria"),
-                socio.get("faixa_etaria")
-            ]
-            for socio in (info.get("qsa") or [])  # Garante que seja uma lista ou uma lista vazia
-        ],
+        # "Regime Tributário": info.get("regime_tributario"),
+        # # Lista de listas para QSA
+        # "QSA": [
+        #     [
+        #         socio.get("identificador_de_socio"),
+        #         socio.get("nome_socio"),
+        #         socio.get("cnpj_cpf_do_socio"),
+        #         socio.get("codigo_qualificacao_socio"),
+        #         socio.get("qualificacao_socio"),
+        #         socio.get("data_entrada_sociedade"),
+        #         socio.get("codigo_pais"),
+        #         socio.get("pais"),
+        #         socio.get("cpf_representante_legal"),
+        #         socio.get("nome_representante_legal"),
+        #         socio.get("codigo_qualificacao_representante_legal"),
+        #         socio.get("qualificacao_representante_legal"),
+        #         socio.get("codigo_faixa_etaria"),
+        #         socio.get("faixa_etaria")
+        #     ]
+        #     for socio in (info.get("qsa") or [])  # Garante que seja uma lista ou uma lista vazia
+        # ],
         # Lista de listas para CNAEs Secundários
         "CNAEs Secundários": [
             [
@@ -89,8 +93,6 @@ for cnpj, info in data.items():
 # Cria o DataFrame
 df = pd.DataFrame(rows)
 
-# Exibe o DataFrame
-print(df)
-
 # Salva o DataFrame em um arquivo CSV (opcional)
-df.to_csv("./data/processed/cnpjs_data.csv", index=False, encoding="utf-8", sep=";")
+df.to_csv("./data/processed/cnpjs_transforado.csv",
+          index=False, encoding="utf-8", sep=";")
