@@ -1,21 +1,27 @@
-# SETUP RENV ----
-if (!requireNamespace("renv", quietly = TRUE)) {
-  install.packages("renv")
-}
-renv::activate()
-
 # SETUP PROJECT ----
 options(
   stringsAsFactors = FALSE,
   repos = c(CRAN = "https://vps.fmvz.usp.br/CRAN/")
 )
 
-# SETUP DIRETÓRIOS ----
-REMOTE_DIR <- "C:/Users/cesar.oliveira/github/portifolio/projetos/analisedados/captura-cnpj"
-# LOCAL_DIR <- "C:/Users/cesargabriel/github/portifolio/projetos/analisedados/captura-cnpj"
+# SETUP RENV ----
+if (!require("renv", quietly = TRUE)) {
+  install.packages("renv")
+} else {
+  print("iniciando o RENV")
+  renv::init()
+  #> 3: Activate the project
+}
+# ativar caso já exista
+renv::activate()
 
-setwd(REMOTE_DIR)
-getwd()
+
+# SETUP DIRETÓRIOS ----
+DIR_PROJECT <- getwd()
+# [1] "C:/Users/cesar.oliveira/github/projetos/analisedados/captura-cnpj"
+
+DIR_PACKAGES <- .libPaths(renv::paths$library())
+
 
 # SETUP PACKAGES ----
 PACKAGES <- c("dplyr", "ggplot2", "readr", "readxl", "fs", "janitor", "writexl", "purrr")
@@ -24,7 +30,7 @@ PACKAGES <- c("dplyr", "ggplot2", "readr", "readxl", "fs", "janitor", "writexl",
 for (pkg in PACKAGES) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     install.packages(pkg)
-    renv::snapshot(prompt = FALSE) # Atualiza o renv.lock automaticamente
+    renv::snapshot(prompt = TRUE)
   }
   library(pkg, character.only = TRUE)
 }
