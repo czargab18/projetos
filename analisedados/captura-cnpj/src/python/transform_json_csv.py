@@ -95,4 +95,4 @@ df = pd.DataFrame(rows)
 
 # Salva o DataFrame em um arquivo CSV (opcional)
 df.to_csv("./data/processed/cnpjs_transforado.csv",
-          index=False, encoding="utf-8", sep=";")
+          index=False, encoding="utf-8-sig", sep=";")
