@@ -19,6 +19,28 @@ base_mcti <-
 # [11] "razao_social_dispendio"          "servico"
 # [13] "valor"
 
+# TEMP: ANALISE QUEBRAS DE LINHAS ----
+
+# RESULTADOS: há ";" em serviço que pode interferir na exportação das informações
+# [1] - Elaboração de documento atualizado do Estado da Arte – Uso de RV e RA em HVDC; - Preleção de Software e Hardware para criação dos s
+
+
+base_mcti |>
+  dplyr::filter(
+    stringr::str_detect(razao_social, "CENTRAIS ELETRICAS DO NORTE DO BRASIL S/A") &
+      stringr::str_detect(servico, "Elaboração de docu")
+  ) |>
+  dplyr::select(servico) |>
+  dplyr::mutate(
+    test_detec = stringr::str_replace_all(servico, "^\\-\\s*|-\\s*;|;", "."),
+    test_detec = stringr::str_replace_all(test_detec, "^\\.", ""),
+    test_detec = stringr::str_remove(test_detec, "\\s*-\\s*"),
+   ) |>
+  dplyr::select(test_detec) |>
+  View()
+
+
+
 # SALVANDO ----
 ## SALVANDO BASE DE DADOS COM OS CNPJS QUE ATENDEM AS CONDIÇÕES
 # writexl::write_xlsx(base_mcti, "data/processed/base_mcti.xlsx")
