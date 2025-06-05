@@ -4,7 +4,7 @@ library(tidyverse)
 
 
 base_request <- read_delim(
-  file = "./data/processed/cnpjs_data.csv",
+  file = "./data/processed/cnpjs_transforado.csv",
   col_types = list(col_character()),
   delim = ";"
 ) |>
@@ -21,28 +21,22 @@ base_request <- read_delim(
         bairro,
         municipio,
         nome_cidade_no_exterior,
-        qsa,
+       # qsa,
         cna_es_secundarios
       ),
       ~ stringr::str_replace_all(.x, ";", "\\\\n")
     )
   )
 
-base_request |>
-  dplyr::filter(
-    dplyr::if_any(everything(), ~ stringr::str_detect(.x, "7852005005', 'forma_de_tributacao': '"))
-  ) |>
-  dplyr::select(regime_tributario)  |>
-  View()
 
 # # SALVANDO BASE COMPLETA ----
 # # usar separador ";"
-# write.table(
-#   x = base_request,
-#   file = "data/processed/base_request.csv",
-#   sep = ";",
-#   row.names = FALSE,
-#   col.names = TRUE,
-#   quote = TRUE,
-#   fileEncoding = "UTF-8"
-# )
+write.table(
+  x = base_request,
+  file = "data/processed/base_request.csv",
+  sep = ";",
+  row.names = FALSE,
+  col.names = TRUE,
+  quote = TRUE,
+  fileEncoding = "UTF-8"
+)
