@@ -9,7 +9,12 @@ base_mcti <-
     sheet = "Export",
     col_types = "text"
   ) |>
-  janitor::clean_names()
+  janitor::clean_names() |>
+  dplyr::mutate(
+      test_detec = stringr::str_replace_all(servico, "\\s*-\\s*", " "),
+      test_detec = stringr::str_replace_all(test_detec, "\\s*[\\-–]\\s*", ". "),
+      test_detec = stringr::str_replace_all(test_detec, ";\\s*", ". ")
+  )
 
 #  [1] "ano_base"                        "cnpj"
 #  [3] "razao_social"                    "codigo_atividade_economica_ibge"
@@ -30,14 +35,6 @@ base_mcti |>
     stringr::str_detect(razao_social, "CENTRAIS ELETRICAS DO NORTE DO BRASIL S/A") &
       stringr::str_detect(servico, "Elaboração de docu")
   ) |>
-  dplyr::select(servico) |>
-  dplyr::mutate(
-    test_detec = stringr::str_replace_all(servico, "^\\-\\s*|-\\s*;|;", "."),
-    test_detec = stringr::str_replace_all(test_detec, "^\\.", ""),
-    test_detec = stringr::str_remove(test_detec, "\\s*-\\s*"),
-   ) |>
-  dplyr::select(test_detec) |>
-  View()
 
 
 
