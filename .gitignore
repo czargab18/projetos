@@ -3,6 +3,16 @@
 ###########################################
 ##### IGNORAR
 renv/*
+# ignorados automaticamente por renv/.gitignore
+renv/.gitignore
+renv/library/
+renv/local/
+renv/cellar/
+renv/lock/
+renv/python/
+renv/sandbox/
+renv/staging/
+
 **/data/**/*.xlsx
 **/data/**/*.csv
 **/data/**/*.txt
@@ -11,5 +21,6 @@ renv/*
 
 !**/data/processed/cnpj*.json
 !**/renv/activate.R
+!**/renv/settings.json
 !.Rprofile
 !renv.lock
