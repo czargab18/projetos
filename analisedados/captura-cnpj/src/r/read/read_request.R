@@ -3,7 +3,7 @@
 library(tidyverse)
 
 base_request <- read_delim(
-  file = "C:/Users/cesar.oliveira/github/projetos/analisedados/captura-cnpj/data/processed/cnpjs_data.csv",
+  file = "./data/processed/cnpjs_data.csv",
   col_types = list(col_character()),
   delim = ";"
 ) |>
@@ -23,13 +23,17 @@ base_request <- read_delim(
         qsa,
         cna_es_secundarios
       ),
-      ~ stringr::str_replace_all(.x, "\\s*-\\s*", " ") |>
-        stringr::str_replace_all("\\s*[\\-–]\\s*", ". ") |>
-        stringr::str_replace_all(";\\s*", ". ")
+      ~ stringr::str_detect(.x, ";")
     )
   )
 
-view(base_request)
+base_request |>
+  dplyr::filter(
+    dplyr::if_any(
+      everything(), # todas as counas
+      ~ stringr::str_detect(.x, ";")
+    )
+  )
 
 # SALVANDO BASE COMPLETA ----
 # usar separador ";"
