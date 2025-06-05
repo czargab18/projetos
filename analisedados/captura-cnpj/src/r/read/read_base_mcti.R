@@ -10,11 +10,17 @@ base_mcti <-
     col_types = "text"
   ) |>
   janitor::clean_names() |>
+  # formata caracteres, como ";" e "-"
   dplyr::mutate(
       servico = stringr::str_replace_all(servico, "\\s*-\\s*", " "),
       servico = stringr::str_replace_all(servico, "\\s*[\\-–]\\s*", ". "),
       servico = stringr::str_replace_all(servico, ";\\s*", ". ")
   )
+
+# SALVANDO ----
+## SALVANDO BASE DE DADOS COM OS CNPJS QUE ATENDEM AS CONDIÇÕES
+# writexl::write_xlsx(base_mcti, "data/processed/base_mcti.csv")
+
 
 # > ... janitor::clean_names()
 #  [1] "ano_base"                        "cnpj"
