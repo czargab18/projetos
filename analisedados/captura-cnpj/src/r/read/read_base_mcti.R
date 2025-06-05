@@ -20,31 +20,3 @@ base_mcti <-
 # SALVANDO ----
 ## SALVANDO BASE DE DADOS COM OS CNPJS QUE ATENDEM AS CONDIÇÕES
 # writexl::write_xlsx(base_mcti, "data/processed/base_mcti.csv")
-
-
-# > ... janitor::clean_names()
-#  [1] "ano_base"                        "cnpj"
-#  [3] "razao_social"                    "codigo_atividade_economica_ibge"
-#  [5] "uf"                              "numero_projeto"
-#  [7] "projeto"                         "setor"
-#  [9] "tipo_dispendio"                  "cnpj_dispendio"
-# [11] "razao_social_dispendio"          "servico"
-# [13] "valor"
-
-# TEMP: ANALISE QUEBRAS DE LINHAS ----
-
-# RESULTADOS: há ";" em serviço que pode interferir na exportação das informações
-# [1] - Elaboração de documento atualizado do Estado da Arte – Uso de RV e RA em HVDC; - Preleção de Software e Hardware para criação dos s
-
-base_mcti |>
-  dplyr::filter(
-    stringr::str_detect(razao_social, "CENTRAIS ELETRICAS DO NORTE DO BRASIL S/A") &
-      stringr::str_detect(servico, "Elaboração de docu")
-  ) |>
-  dplyr::select(servico)
-
-
-# SALVANDO ----
-## SALVANDO BASE DE DADOS COM OS CNPJS QUE ATENDEM AS CONDIÇÕES
-# writexl::write_xlsx(base_mcti, "data/processed/base_mcti.xlsx")
-
