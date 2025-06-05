@@ -11,32 +11,36 @@
 ################################################################################
 
 # SET UP PACKAGES ----
-use("dplyr", c("full_join"))
+use("dplyr", c("full_join", "right_join", "mutate_all", "rename_with"))
+use("utils", c("write.table"))
 
-library(dplyr)
 
 # CARREGAR BASES ----
 source("src/r/read/read_base_mcti.R")
 source("src/r/read/read_request.R")
 
 # JUNTAR BASES ----
-base_mcti_request <- dplyr::right_join(
+base_mcti_request <-
+dplyr::right_join(
   x = base_mcti,
   y = base_request,
   by = c("cnpj_dispendio" = "cnpj")
 ) |>
-  dplyr::mutate_all(as.character)
+  dplyr::mutate_all(as.character) |>
+  dplyr::rename_with(~ gsub("\\.x$", ".empresa", .x)) |>
+  dplyr::rename_with(~ gsub("\\.y$", ".parceira", .x))
 
 # View(base_mcti_request[23:26, ])
 
+
 # SALVANDO BASE COMPLETA ----
 # usar separador ";"
-# write.table(
-#   x = base_mcti_request,
-#   file = "data/processed/base_mcti_request.csv",
-#   sep = ";",
-#   row.names = FALSE,
-#   col.names = TRUE,
-#   quote = TRUE,
-#   fileEncoding = "UTF-8"
-# )
+utils::write.table(
+  x = base_mcti_request,
+  file = "data/processed/base_mcti_request.csv",
+  sep = ";",
+  row.names = FALSE,
+  col.names = TRUE,
+  quote = TRUE,
+  fileEncoding = "UTF-8"
+)

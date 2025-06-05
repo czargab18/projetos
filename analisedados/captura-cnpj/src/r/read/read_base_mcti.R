@@ -8,7 +8,7 @@ use("writexl", c("write_xlsx"))
 
 base_mcti <-
   readxl::read_xlsx(
-    path = "C:/Users/cesar.oliveira/github/projetos/analisedados/captura-cnpj/data/processed/base_cnpjs.xlsx",
+    path = "C:/Users/cesar.oliveira/github/projetos/analisedados/captura-cnpj/data/processed/mcti_base_cnpjs.xlsx",
     sheet = "Export",
     col_types = "text"
   ) |>
