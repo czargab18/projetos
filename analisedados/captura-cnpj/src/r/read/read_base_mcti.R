@@ -1,7 +1,10 @@
 # SETUP IMPORT base_mcti ----
 
 use("readxl", c("read_xlsx"))
-library(readxl)
+use("janitor", c("clean_names"))
+use("dplyr", c("mutate", "filter", "select"))
+use("stringr", c("str_replace_all", "str_remove", "str_detect"))
+use("writexl", c("write_xlsx"))
 
 base_mcti <-
   readxl::read_xlsx(
