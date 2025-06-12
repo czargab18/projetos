@@ -1,16 +1,7 @@
-################################################################################
-## exemplo:
-# > full_join(data1, data2, by = "ID")
-################################################################################
-## juntarpor uma coluna que nas duas bases tem nomes diferentes
-# > dplyr::full_join(x = BASE, y = base, by = c("coluna_x" = "coluna_y"))
-################################################################################
-# referencias:
-# - https://www.youtube.com/watch?v=xnUo25VRH70
-# - https://statisticsglobe.com/r-dplyr-join-inner-left-right-full-semi-anti
-################################################################################
+# SETUP PROJETO ----
+source("config/setup.R")
 
-# SET UP PACKAGES ----
+# SETUP PACKAGES ----
 use("dplyr", c("full_join", "right_join", "mutate_all", "rename_with"))
 use("utils", c("write.table"))
 
@@ -44,3 +35,17 @@ utils::write.table(
   quote = TRUE,
   fileEncoding = "UTF-8"
 )
+
+
+# REFERENCIAS
+################################################################################
+## exemplo:
+# > full_join(data1, data2, by = "ID")
+################################################################################
+## juntarpor uma coluna que nas duas bases tem nomes diferentes
+# > dplyr::full_join(x = BASE, y = base, by = c("coluna_x" = "coluna_y"))
+################################################################################
+# referencias:
+# - https://www.youtube.com/watch?v=xnUo25VRH70
+# - https://statisticsglobe.com/r-dplyr-join-inner-left-right-full-semi-anti
+################################################################################

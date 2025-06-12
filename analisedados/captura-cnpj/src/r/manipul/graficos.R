@@ -1,26 +1,32 @@
+# SETUP PROJETO ----
+source("config/setup.R")
 # Configurando outros repositórios.
 source("src/r/manipul/join_base_and_request.R")
 source("src/r/manipul/manipulacao.R")
 
-library(dplyr)
-library(ggplot2)
-library(dplyr)
+# SETUP PACKAGES ----
+
+use("tidyverse", c("mutate", "filter", "arrange"))
+use("ggplot2", c("ggplot", "geom_point", "geom_line"))
+
 
 # FUNCTIONS ----
 theme_custom <- function(plot, title, title.y) {
   plot +
-    labs(
+    ggplot2::labs(
       title = title,
       y = title.y
     ) +
-    theme(
-      axis.title.y = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.major.x = element_line(color = "#c0bebe", linetype = "dashed"),
-      panel.grid.minor = element_blank(),
-      panel.background = element_blank(),
-      axis.ticks.y = element_blank(),
-      axis.line.x.bottom = element_line(color = "black")
+    ggplot2::theme(
+      axis.title.y = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_line(
+        color = "#c0bebe", linetype = "dashed"
+        ),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.background = ggplot2::element_blank(),
+      axis.ticks.y = ggplot2::element_blank(),
+      axis.line.x.bottom = ggplot2::element_line(color = "black")
     )
 }
 
@@ -31,7 +37,12 @@ names(base_mcti_request)
 plot_tipo_dispendio <-
 base_mcti_request |>
   dplyr::count(tipo_dispendio) |>
-  dplyr::mutate(tipo_dispendio = factor(tipo_dispendio, levels = tipo_dispendio[order(n)])) |>
+  dplyr::mutate(
+    tipo_dispendio = factor(
+      tipo_dispendio,
+      levels = tipo_dispendio[order(n)]
+    )
+  ) |>
   ggplot(aes(x = tipo_dispendio, y = n)) +
   geom_bar(stat = "identity") +
   coord_flip()

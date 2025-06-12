@@ -1,4 +1,7 @@
 # TODOS OS SCRIPT EM UM ÚNICO LUGAR PARA RODAR DE FORMA RÁPIDA
 
-# SETUP PACKAGES ---
+# SETUP PROJETO ----
+source("config/setup.R")
+
+# SETUP PACKAGES ----
 use("dplyr", c("mutate", "case_when", "filter"))

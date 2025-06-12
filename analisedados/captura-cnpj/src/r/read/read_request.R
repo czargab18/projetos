@@ -1,6 +1,10 @@
-# install.packages("tidyverse")
+# SETUP PROJETO ----
+source("config/setup.R")
 
-library(tidyverse)
+# SETUP PACKAGES ----
+use("tidyverse", c("read_delim", "mutate", "across", "str_replace_all"))
+use("janitor", c("clean_names"))
+use("utils", c("write.table"))
 
 
 base_request <- read_delim(

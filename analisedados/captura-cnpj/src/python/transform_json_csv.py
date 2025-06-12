@@ -59,7 +59,8 @@ for cnpj, info in data.items():
         "Código Porte": info.get("codigo_porte"),
         "Porte": info.get("porte"),
         "Ente Federativo Responsável": info.get("ente_federativo_responsavel"),
-        # "Regime Tributário": info.get("regime_tributario"),
+        # Utilizar última informação
+        "Regime Tributário": info.get("regime_tributario")[-1] if info.get("regime_tributario") else None,
         # # Lista de listas para QSA
         # "QSA": [
         #     [

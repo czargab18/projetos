@@ -1,3 +1,10 @@
+# SETUP PROJETO ----
+source("config/setup.R")
+
+# SETUP PACKAGES ----
+use("janitor", c("clean_names"))
+use("writexl", c("write_xlsx"))
+
 # # LIMPNDO OS NOMES COM JANITOR
 BASE <-
   BASE |>
