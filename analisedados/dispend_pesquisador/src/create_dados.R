@@ -1,4 +1,4 @@
-# source("config/setup.R")
+source("config/setup.R")
 
 # Carregar pacotes necessários
 library(dplyr)
@@ -16,7 +16,7 @@ gerar_nome <- function(n) {
 
 # Função para gerar IDs de projetos aleatórios
 gerar_id_projeto <- function(n) {
-  replicate(n, paste0("PROJ_", sample(1000:9999, 1)))
+  replicate(n, paste0("PROJ_", sample(1000:9999, 1, replace = TRUE)))
 }
 
 # Função para gerar datas aleatórias
@@ -24,14 +24,16 @@ gerar_data <- function(n, anos) {
   as.Date(sample(seq(Sys.Date() - anos * 365, Sys.Date(), by = "day"), n))
 }
 
-# Gerar o data.frame fictício
+# Gerar o data.frame fictício com muitos registros
+n_registros <- 10000
+
 dados_ficticios <- data.frame(
-  cnpj = gerar_cnpj(14),
-  nome = gerar_nome(14),
-  projeto = "gerar_id_projeto(14)",
-  data_contratacao = gerar_data(14, anos = 1),
-  data_encerramento = gerar_data(14, anos = 2)
+  cnpj = gerar_cnpj(n_registros),
+  nome = gerar_nome(n_registros),
+  projeto = gerar_id_projeto(n_registros),
+  data_contratacao = gerar_data(n_registros, anos = 1),
+  data_encerramento = gerar_data(n_registros, anos = 2)
 )
 
-# Exibir os dados gerados
-print(dados_ficticios)
+# Exibir os primeiros registros gerados
+print(head(dados_ficticios))
