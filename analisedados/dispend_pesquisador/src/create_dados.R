@@ -1,8 +1,10 @@
 source("config/setup.R")
 
 # Carregar pacotes necessários
-library(dplyr)
-library(stringi)
+use("stringi", c("stri_rand_strings"))
+use("lubridate", c("ymd", "interval", "duration"))
+use("purrr", c("map", "map2", "map2_dbl"))
+use("dplyr", c("mutate", "filter", "select"))
 
 # Função para gerar CNPJs aleatórios
 gerar_cnpj <- function(n) {
@@ -21,7 +23,7 @@ gerar_id_projeto <- function(n) {
 
 # Função para gerar datas aleatórias
 gerar_data <- function(n, anos) {
-  as.Date(sample(seq(Sys.Date() - anos * 365, Sys.Date(), by = "day"), n))
+  as.Date(sample(seq(Sys.Date() - anos * 365, Sys.Date(), by = "day"), n, replace = TRUE))
 }
 
 # Gerar o data.frame fictício com muitos registros
@@ -33,7 +35,35 @@ dados_ficticios <- data.frame(
   projeto = gerar_id_projeto(n_registros),
   data_contratacao = gerar_data(n_registros, anos = 1),
   data_encerramento = gerar_data(n_registros, anos = 2)
-)
-
-# Exibir os primeiros registros gerados
-print(head(dados_ficticios))
+) |>
+    dplyr::mutate(
+      periodo = purrr::map2_dbl(
+        .x = data_encerramento,
+        .y = data_contratacao,
+        .f = ~ round(
+          lubridate::time_length(
+            lubridate::interval(lubridate::ymd(.x), lubridate::ymd(.y)),
+            "months"
+          ),
+          2
+        )
+      )
+    ) |>
+      # O valor em "periodo" representa a quantidade de meses entre a data de encerramento e a data de contratação
+      # filtrando os dados que forão gerados. Ignorando o qe não faz sentido
+      dplyr::filter(
+        periodo >= 0
+      ) |>
+      # Calculo:
+      #   Se periodo >= 12, um ano trabalhando no projeto => RECEBE incentivo
+      #   Se periodo <= 12, um ano trabalhando no projeto => NÃO RECEBE incentivo
+      dplyr::mutate(
+        incentivo = dplyr::case_when(
+          periodo >= 12 ~ "RECEBE",
+          periodo <= 12 ~ "NÃO RECEBE",
+          TRUE ~ NA
+        )
+      ) |>
+      dplyr::filter(
+        incentivo == "RECEBE"
+      )

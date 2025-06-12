@@ -25,7 +25,7 @@ DIR_PACKAGES <- .libPaths(renv::paths$library())
 
 
 # SETUP PACKAGES ----
-PACKAGES <- c("dplyr", "ggplot2", "readr", "readxl", "fs", "janitor", "writexl", "purrr")
+PACKAGES <- c("dplyr", "ggplot2", "readr", "readxl", "fs", "janitor", "writexl", "purrr", "stringi")
 
 # Instala e carrega os pacotes usando {renv}
 for (pkg in PACKAGES) {
