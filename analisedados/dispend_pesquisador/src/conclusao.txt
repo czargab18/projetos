@@ -22,3 +22,6 @@ do incremento.
 [11:49, 12/06/2025] +55 19 98169-1571: Na grande maioria as empresas entendem que a legislação é falha e por isso acrescentam um a cada ano.
 [11:52, 12/06/2025] +55 19 98169-1571: Outro problema é que a rotatividade é muito grande no Brasil. Isso resulta num troca-troca danado. Eu estava fazendo contas por cima e deu cerca de 40%.
 """
+
+inl usa média
+nóss: valor absoluto
