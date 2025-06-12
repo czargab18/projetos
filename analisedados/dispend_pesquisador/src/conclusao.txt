@@ -1,0 +1,24 @@
+Dados
+- x pesquisadores por projeto
+
+Hipotese:
+- 1. trabalhou 1 ou mais anos => VÁLIDO PARA RECEBE incentivo
+- 2. trabalhou menos que 1 => NÃO VÁLIDO PARA RECEBE incentivo
+
+Interpretação:
+As informações de todos os pesquisadores, mesmo que muito, é mais útil.
+Os problemas de arredondamento, causados pela média, podem interferir no cálculo
+do incremento.
+
+- 25 para 35 ou incremento de mais de 10 contratações, considerando H1.
+
+
+
+"""
+[11:47, 12/06/2025] +55 19 98169-1571: Mas se a empresa declarar, logo no primeiro ano, 60 pesquisadores no ano seguinte terá que apresentar no mínimo 63 pesquisadores
+[11:47, 12/06/2025] +55 19 98169-1571: e assim por diante
+[11:47, 12/06/2025] +55 19 98169-1571: Mas, não se esqueça que tem o percentual abaixo dos 5% também.
+[11:48, 12/06/2025] +55 19 98169-1571: Tem umas consultorias que coloca um pesquisador que foi alocado em dezembro do Ano Fiscal, depois no ano seguinte coloca outra pessoa com 2 meses trabalhados, depois 4 meses trabalhados.
+[11:49, 12/06/2025] +55 19 98169-1571: Na grande maioria as empresas entendem que a legislação é falha e por isso acrescentam um a cada ano.
+[11:52, 12/06/2025] +55 19 98169-1571: Outro problema é que a rotatividade é muito grande no Brasil. Isso resulta num troca-troca danado. Eu estava fazendo contas por cima e deu cerca de 40%.
+"""
