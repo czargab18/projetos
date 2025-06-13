@@ -1,10 +1,11 @@
-source("config/setup.R")
+# source("config/setup.R")
 
 # Carregar pacotes necessários
 use("stringi", c("stri_rand_strings"))
 use("lubridate", c("ymd", "interval", "duration"))
 use("purrr", c("map", "map2", "map2_dbl"))
 use("dplyr", c("mutate", "filter", "select"))
+use("writexl", c("write_xlsx"))
 
 # Função para gerar CNPJs aleatórios
 gerar_cnpj <- function(n) {
@@ -34,11 +35,11 @@ gerar_data <- function(n, anos) {
 }
 
 # Gerar o data.frame fictício com muitos registros
-n_registros <- 1000000
+n_registros <- 1000
 
-dados_ficticios <- data.frame(
-  cnpj = gerar_cnpj(n_registros),
-  nome = gerar_nome(n_registros),
+dados <- tibble(
+  cnpj = sample(gerar_cnpj(n_registros), size = n_registros, replace = TRUE),
+  nome = sample(gerar_nome(n_registros), size = n_registros, replace = TRUE),
   projeto = gerar_id_projeto(n_registros),
   data_contratacao = gerar_data(n_registros, anos = 1),
   data_encerramento = gerar_data(n_registros, anos = 2)
@@ -52,7 +53,7 @@ dados_ficticios <- data.frame(
           lubridate::interval(lubridate::ymd(.x), lubridate::ymd(.y)),
           "months"
         ),
-        2
+        0
       )
     )
   ) |>
@@ -70,7 +71,14 @@ dados_ficticios <- data.frame(
       periodo <= 12 ~ "NÃO RECEBE",
       TRUE ~ NA
     )
-  ) |>
-  dplyr::filter(
-    incentivo == "RECEBE"
   )
+
+if (!dir.exists("./data")) {
+  dir.create("./data")
+}
+
+# salvando
+writexl::write_xlsx(
+  x = dados,
+  path = "data/dados_gerados.xlsx"
+)
