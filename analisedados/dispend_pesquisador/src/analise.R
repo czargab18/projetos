@@ -10,6 +10,7 @@ dados_gerados <-
     meses,
     incentivo
   ) |>
+  dplyr::filter(incentivo == "RECEBE")  |>
   dplyr::group_by(cnpj) |>
   dplyr::summarise(
     qtd_pesq = dplyr::n_distinct(pesquisador),
@@ -18,13 +19,8 @@ dados_gerados <-
     media_meses = mean(meses, na.rm = TRUE)
   )
 
-#mean_qtd_pesq_empresas <-
 mean(dados_gerados$qtd_pesq)
-#mean_qtd_meses_empresas <-
 mean(dados_gerados$qtd_meses)
-
-# print(mean_qtd_pesq_empresas)
-# print(mean_qtd_meses_empresas)
 
 # Problema:
 # avaliar consideração de quantidades de pesquisadores com média de pesquisadores para avaliação de projetos.
