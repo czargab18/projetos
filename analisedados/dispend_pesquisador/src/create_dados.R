@@ -23,11 +23,15 @@ gerar_id_projeto <- function(n) {
 
 # Função para gerar datas aleatórias
 gerar_data <- function(n, anos) {
-  as.Date(sample(seq(Sys.Date() - anos * 365, Sys.Date(), by = "day"), n, replace = TRUE))
+  as.Date(sample(
+    seq(Sys.Date() - anos * 365, Sys.Date(), by = "day"),
+    n,
+    replace = TRUE
+  ))
 }
 
 # Gerar o data.frame fictício com muitos registros
-n_registros <- 10000
+n_registros <- 1000000
 
 dados_ficticios <- data.frame(
   cnpj = gerar_cnpj(n_registros),
@@ -36,34 +40,34 @@ dados_ficticios <- data.frame(
   data_contratacao = gerar_data(n_registros, anos = 1),
   data_encerramento = gerar_data(n_registros, anos = 2)
 ) |>
-    dplyr::mutate(
-      periodo = purrr::map2_dbl(
-        .x = data_encerramento,
-        .y = data_contratacao,
-        .f = ~ round(
-          lubridate::time_length(
-            lubridate::interval(lubridate::ymd(.x), lubridate::ymd(.y)),
-            "months"
-          ),
-          2
-        )
+  dplyr::mutate(
+    periodo = purrr::map2_dbl(
+      .x = data_encerramento,
+      .y = data_contratacao,
+      .f = ~ round(
+        lubridate::time_length(
+          lubridate::interval(lubridate::ymd(.x), lubridate::ymd(.y)),
+          "months"
+        ),
+        2
       )
-    ) |>
-      # O valor em "periodo" representa a quantidade de meses entre a data de encerramento e a data de contratação
-      # filtrando os dados que forão gerados. Ignorando o qe não faz sentido
-      dplyr::filter(
-        periodo >= 0
-      ) |>
-      # Calculo:
-      #   Se periodo >= 12, um ano trabalhando no projeto => RECEBE incentivo
-      #   Se periodo <= 12, um ano trabalhando no projeto => NÃO RECEBE incentivo
-      dplyr::mutate(
-        incentivo = dplyr::case_when(
-          periodo >= 12 ~ "RECEBE",
-          periodo <= 12 ~ "NÃO RECEBE",
-          TRUE ~ NA
-        )
-      ) |>
-      dplyr::filter(
-        incentivo == "RECEBE"
-      )
+    )
+  ) |>
+  # O valor em "periodo" representa a quantidade de meses entre a data de encerramento e a data de contratação
+  # filtrando os dados que forão gerados. Ignorando o qe não faz sentido
+  dplyr::filter(
+    periodo >= 0
+  ) |>
+  # Calculo:
+  #   Se periodo >= 12, um ano trabalhando no projeto => RECEBE incentivo
+  #   Se periodo <= 12, um ano trabalhando no projeto => NÃO RECEBE incentivo
+  dplyr::mutate(
+    incentivo = dplyr::case_when(
+      periodo >= 12 ~ "RECEBE",
+      periodo <= 12 ~ "NÃO RECEBE",
+      TRUE ~ NA
+    )
+  ) |>
+  dplyr::filter(
+    incentivo == "RECEBE"
+  )
