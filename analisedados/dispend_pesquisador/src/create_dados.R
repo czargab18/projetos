@@ -39,7 +39,12 @@ n_registros <- 1000
 
 dados <- tibble(
   cnpj = sample(gerar_cnpj(n_registros), size = n_registros, replace = TRUE),
-  nome = sample(gerar_nome(n_registros), size = n_registros, replace = TRUE),
+  razao_social = sample(
+    gerar_nome(n_registros),
+    size = n_registros,
+    replace = TRUE
+  ),
+  pesquisador = gerar_nome(n_registros),
   projeto = gerar_id_projeto(n_registros),
   data_contratacao = gerar_data(n_registros, anos = 1),
   data_encerramento = gerar_data(n_registros, anos = 2)
@@ -71,6 +76,10 @@ dados <- tibble(
       periodo <= 12 ~ "NÃO RECEBE",
       TRUE ~ NA
     )
+  ) |>
+  dplyr::rename_with(
+    .fn = ~"meses",
+    .cols = periodo
   )
 
 if (!dir.exists("./data")) {
