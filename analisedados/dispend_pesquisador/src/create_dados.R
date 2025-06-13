@@ -13,7 +13,10 @@ gerar_cnpj <- function(n) {
 
 # Função para gerar nomes aleatórios
 gerar_nome <- function(n) {
-  replicate(n, stri_rand_strings(1, sample(5:10, 1), pattern = "[A-Za-z]"))
+  replicate(
+    n,
+    stringi::stri_rand_strings(1, sample(5:10, 1), pattern = "[A-Za-z]")
+  )
 }
 
 # Função para gerar IDs de projetos aleatórios
