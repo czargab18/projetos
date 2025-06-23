@@ -1,0 +1,115 @@
+name: Sincronizar Repositórios
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 23 27 8 *" # 27 de agosto às 23:00 UTC
+
+jobs:
+  sync:
+    if: github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true) ||
+      github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: ENVIRONMENT
+    env:
+      REPO_SYNC: ${{ secrets.REPO_SYNC }}
+      USEREMAIL: ${{ secrets.USEREMAIL }}
+      USERNAME: ${{ github.repository_owner }}
+
+    steps:
+      - name: Checkout monorepo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ env.REPO_SYNC }}
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "${{ env.USERNAME }}"
+          git config --global user.email "${{ env.USEREMAIL }}"
+
+      - name: Clone estatistica
+        run: |
+          git clone --depth 1 https://czargab18:${{ env.REPO_SYNC }}@github.com/czargab18/estatistica.git temp/estatistica
+          if [ $? -ne 0 ]; then
+            echo "Erro ao clonar o repositório estatistica."
+            exit 1
+          fi
+
+      - name: Copy estatistica to monorepo
+        run: |
+          rm -rf estatistica
+          mkdir -p estatistica
+          cp -r temp/estatistica/. estatistica/
+          if [ $? -ne 0 ]; then
+            echo "Erro ao copiar arquivos de estatistica."
+            exit 1
+          fi
+
+      - name: Clone backend
+        run: |
+          git clone --depth 1 https://czargab18:${{ env.REPO_SYNC }}@github.com/czargab18/backend.git temp/backend
+          if [ $? -ne 0 ]; then
+            echo "Erro ao clonar o repositório backend."
+            exit 1
+          fi
+
+      - name: Copy backend to monorepo
+        run: |
+          rm -rf backend
+          mkdir -p backend
+          cp -r temp/backend/. backend/
+          if [ $? -ne 0 ]; then
+            echo "Erro ao copiar arquivos de backend."
+            exit 1
+          fi
+
+      - name: Clone books
+        run: |
+          git clone --depth 1 https://czargab18:${{ env.REPO_SYNC }}@github.com/czargab18/books.git temp/books
+          if [ $? -ne 0 ]; then
+            echo "Erro ao clonar o repositório books."
+            exit 1
+          fi
+
+      - name: Copy books to monorepo
+        run: |
+          rm -rf books
+          mkdir -p books
+          cp -r temp/books/. books/
+          if [ $? -ne 0 ]; then
+            echo "Erro ao copiar arquivos de books."
+            exit 1
+          fi
+
+      - name: Clone api
+        run: |
+          git clone --depth 1 https://czargab18:${{ env.REPO_SYNC }}@github.com/czargab18/api.git temp/api
+          if [ $? -ne 0 ]; then
+            echo "Erro ao clonar o repositório api."
+            exit 1
+          fi
+
+      - name: Copy api to monorepo
+        run: |
+          rm -rf api
+          mkdir -p api
+          cp -r temp/api/. api/
+          if [ $? -ne 0 ]; then
+            echo "Erro ao copiar arquivos de api."
+            exit 1
+          fi
+
+      - name: Clean up temp folder
+        run: rm -rf temp
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          git diff --staged --quiet && echo "No changes to commit" || git commit -m "chore: sync latest updates from sub-repos ($timestamp)"
+          git push origin main --force
+        env:
+          GIT_AUTHOR_NAME: ${{ env.USERNAME }}
+          GIT_AUTHOR_EMAIL: ${{ env.USEREMAIL }}
