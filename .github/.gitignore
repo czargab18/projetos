@@ -5,7 +5,7 @@
 **/*.csv
 **/*.xlsx
 **/*.xls
-**/**/.gitignore
+**/*.gitignore
 ##### NÃO IGNORAR
 !/.gitignore
 
@@ -15,7 +15,6 @@
 ##### IGNORAR
 renv/*
 # ignorados automaticamente por renv/.gitignore
-renv/.gitignore
 renv/library/
 renv/local/
 renv/cellar/
@@ -33,5 +32,6 @@ renv/staging/
 !**/data/processed/cnpj*.json
 !**/renv/activate.R
 !**/renv/settings.json
+!**/renv/.gitignore
 !.Rprofile
 !renv.lock
