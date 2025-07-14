@@ -7,13 +7,12 @@ options(
 # SETUP RENV ----
 if (!require("renv", quietly = TRUE)) {
   install.packages("renv")
-} else {
-  print("iniciando o RENV")
+  print("Iniciando o RENV")
   renv::init()
-  #> 3: Activate the project
+} else {
+  print("Ativando o RENV", call. = FALSE)
+  renv::activate()
 }
-# ativar caso já exista
-renv::activate()
 
 
 # SETUP DIRETÓRIOS ----
@@ -26,7 +25,7 @@ DIR_PACKAGES <- .libPaths(renv::paths$library())
 # SETUP PACKAGES ----
 PACKAGES <- c(
   "dplyr", "ggplot2", "readr", "readxl", "fs", "janitor", "writexl", "purrr",
-  "forcats", "tibble", "lubridate", "tidyr", "stringr",
+  "forcats", "tibble", "lubridate", "tidyr", "stringr", "vroom", "utils"
 )
 
 # Instala e carrega os pacotes usando {renv}
@@ -36,11 +35,9 @@ for (pkg in PACKAGES) {
     renv::snapshot(prompt = TRUE)
     library(pkg, character.only = TRUE)
   }
-  library(pkg, character.only = TRUE)
+  library(pkg, character.only = TRUE, warn.conflicts = FALSE)
   print(paste("Pacote carregado:", pkg))
 }
-
-# use() encontrados nos scripts R
 
 # REGAR PACOTES ----
 use("ggplot2", c("ggplot", "geom_point", "geom_line"))
