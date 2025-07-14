@@ -24,7 +24,10 @@ DIR_PACKAGES <- .libPaths(renv::paths$library())
 
 
 # SETUP PACKAGES ----
-PACKAGES <- c("dplyr", "ggplot2", "readr", "readxl", "fs", "janitor", "writexl", "purrr", "tidyverse")
+PACKAGES <- c(
+  "dplyr", "ggplot2", "readr", "readxl", "fs", "janitor", "writexl", "purrr",
+  "forcats", "tibble", "lubridate", "tidyr", "stringr",
+)
 
 # Instala e carrega os pacotes usando {renv}
 for (pkg in PACKAGES) {
@@ -35,16 +38,6 @@ for (pkg in PACKAGES) {
   }
   library(pkg, character.only = TRUE)
   print(paste("Pacote carregado:", pkg))
-}
-
-# SETUP USE() ----
-use <- function(pkg, funs = NULL) {
-  suppressPackageStartupMessages(library(pkg, character.only = TRUE))
-  if (!is.null(funs)) {
-    for (f in funs) {
-      assign(f, get(f, envir = asNamespace(pkg)), envir = .GlobalEnv)
-    }
-  }
 }
 
 # use() encontrados nos scripts R

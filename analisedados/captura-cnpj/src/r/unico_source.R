@@ -2,6 +2,3 @@
 
 # SETUP PROJETO ----
 source("config/setup.R")
-
-# SETUP PACKAGES ----
-use("dplyr", c("mutate", "case_when", "filter"))

@@ -1,7 +1,5 @@
 # SETUP PROJETO ----
 # source("config/setup.R")
-# dependencias
-source("src/r/manipul/join_base_and_request.R")
 
 # SETUP PACKAGES ----
 use("tidyverse", c("mutate", "case_when"))

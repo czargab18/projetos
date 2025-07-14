@@ -1,10 +1,6 @@
 # SETUP PROJETO ----
 # source("config/setup.R")
 
-# SETUP PACKAGES ----
-use("tidyverse", c("read_delim", "mutate", "across", "str_replace_all"))
-use("janitor", c("clean_names"))
-use("utils", c("write.table"))
 
 library(tidyverse)
 library(janitor)

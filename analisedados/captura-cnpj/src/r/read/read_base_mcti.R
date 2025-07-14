@@ -1,13 +1,6 @@
 # SETUP PROJETO ----
 # source("config/setup.R")
 
-# SETUP PACKAGES ----
-# use("readxl", c("read_xlsx"))
-use("readxl")
-use("janitor", c("clean_names"))
-use("dplyr", c("mutate", "filter", "select"))
-use("stringr", c("str_replace_all", "str_remove", "str_detect"))
-use("writexl", c("write_xlsx"))
 
 # SETUP IMPORT base_mcti ----
 base_mcti <-

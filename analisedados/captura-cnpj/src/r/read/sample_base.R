@@ -1,8 +1,6 @@
 # SETUP PROJETO ----
 source("config/setup.R")
 
-# SETUP PACKAGES ----
-use("base", c("set.seed", "sample", "nrow"))
 
 # FAZENDO UMA AMOSTRAGEM PARA DESENVOLVER O SCRIPT MAI RÁÍDO
 set.seed(42) # Para reprodutibilidade

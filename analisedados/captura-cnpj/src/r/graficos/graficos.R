@@ -9,9 +9,6 @@ source("src/r/graficos/temas.R")
 
 # SETUP PACKAGES ----
 
-use("tidyverse", c("mutate", "filter", "arrange"))
-use("ggplot2", c("ggplot", "geom_point", "geom_line"))
-
 
 # FUNCTIONS ----
 theme_custom <- function(plot, title, title.y) {
