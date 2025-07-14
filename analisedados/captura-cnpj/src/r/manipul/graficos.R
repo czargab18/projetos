@@ -53,6 +53,30 @@ theme_custom(
   title.y = "Quantidade de Projetos"
 )
 
+# contagem de numero de icts
+base_mcti_request |>
+  dplyr::select(cnpj_dispendio, tipo_dispendio) |>
+  dplyr::distinct(tipo_dispendio) |>
+  View()
+  dplyr::filter(
+    tipo_dispendio %in% c("Universidades", " Instituição de Pesquisa")
+  ) |>
+  dplyr::select(cnpj_dispendio) |>
+  dplyr::distinct(cnpj_dispendio) |>
+  dplyr::count()
+
+# contagem de numero de icts
+base_mcti_request |>
+  dplyr::select(cnpj_dispendio, tipo_dispendio) |>
+  dplyr::distinct(cnpj_dispendio) |>
+  View()
+  dplyr::filter(
+    tipo_dispendio %in% c("Universidades", " Instituição de Pesquisa")
+  ) |>
+  dplyr::select(cnpj_dispendio) |>
+  dplyr::count()
+
+
 uf_dispendio <-
 base_mcti_request |>
   dplyr::count(uf.y) |>
@@ -103,3 +127,8 @@ base_mcti_request |>
   dplyr::count(razao_social.y) |>
   dplyr::arrange(desc(n))  |>
   View()
+
+
+
+
+

@@ -1,5 +1,5 @@
 # SETUP PROJETO ----
-source("config/setup.R")
+# source("config/setup.R")
 
 # SETUP PACKAGES ----
 use("tidyverse", c("read_delim", "mutate", "across", "str_replace_all"))

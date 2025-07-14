@@ -1,5 +1,5 @@
 # SETUP PROJETO ----
-source("config/setup.R")
+# source("config/setup.R")
 
 # SETUP PACKAGES ----
 use("readxl", c("read_xlsx"))

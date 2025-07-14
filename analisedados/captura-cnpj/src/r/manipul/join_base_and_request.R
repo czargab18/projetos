@@ -1,5 +1,5 @@
 # SETUP PROJETO ----
-source("config/setup.R")
+# source("config/setup.R")
 
 # SETUP PACKAGES ----
 use("dplyr", c("full_join", "right_join", "mutate_all", "rename_with"))
