@@ -1,8 +1,11 @@
 # SETUP PROJETO ----
 source("config/setup.R")
 # Configurando outros repositórios.
-source("src/r/manipul/join_base_and_request.R")
-source("src/r/manipul/manipulacao.R")
+# source("src/r/manipul/join_base_and_request.R")
+# source("src/r/manipul/manipulacao.R")
+
+# TEMAS ----
+source("src/r/graficos/temas.R")
 
 # SETUP PACKAGES ----
 

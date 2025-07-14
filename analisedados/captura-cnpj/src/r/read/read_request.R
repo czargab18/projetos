@@ -6,6 +6,9 @@ use("tidyverse", c("read_delim", "mutate", "across", "str_replace_all"))
 use("janitor", c("clean_names"))
 use("utils", c("write.table"))
 
+library(tidyverse)
+library(janitor)
+library(utils)
 
 base_request <- read_delim(
   file = "./data/processed/cnpjs_transforado.csv",
@@ -35,12 +38,12 @@ base_request <- read_delim(
 
 # # SALVANDO BASE COMPLETA ----
 # # usar separador ";"
-write.table(
-  x = base_request,
-  file = "data/processed/base_request.csv",
-  sep = ";",
-  row.names = FALSE,
-  col.names = TRUE,
-  quote = TRUE,
-  fileEncoding = "UTF-8"
-)
+# write.table(
+#   x = base_request,
+#   file = "data/processed/base_request.csv",
+#   sep = ";",
+#   row.names = FALSE,
+#   col.names = TRUE,
+#   quote = TRUE,
+#   fileEncoding = "UTF-8"
+# )
