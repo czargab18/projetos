@@ -8,8 +8,10 @@ source("src/r/graficos/temas.R")
 
 # GRÁFICO: TIPOS DE PARCERIAS ----
 
-# plot_tipo_dispendio <-
-base_mcti_request |>
+#plot_tipo_dispendio <-
+  base_mcti_request |>
+  dplyr::select(tipo_dispendio, cnpj_dispendio) |>
+
   dplyr::count(tipo_dispendio) |>
   dplyr::mutate(
     tipo_dispendio = factor(
@@ -24,10 +26,7 @@ base_mcti_request |>
     x = "Tipos de Parcerias",
     y = "Quantidade de Projetos"
   ) +
-  theme_custom2()
+  ggplot2::geom_text(aes(label = n), color = "#000000", size = 4) +
+  tema()
 
-theme_custom(
-  plot_tipo_dispendio,
-  title = "Tipos de Parcerias em projetos de P,D&I",
-  title.y = "Quantidade de Projetos"
-)
+# GRÁFICO:
