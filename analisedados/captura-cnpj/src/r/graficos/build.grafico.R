@@ -9,7 +9,7 @@ source("src/r/graficos/temas.R")
 # GRÁFICO: TIPOS DE PARCERIAS ----
 
 # plot_tipo_dispendio <-
-  base_mcti_request |>
+base_mcti_request |>
   dplyr::count(tipo_dispendio) |>
   dplyr::mutate(
     tipo_dispendio = factor(

@@ -1,7 +1,11 @@
 # SETUP PROJECT ----
+
 options(
   stringsAsFactors = FALSE,
-  repos = c(CRAN = "https://vps.fmvz.usp.br/CRAN/")
+  repos = c(CRAN = "https://vps.fmvz.usp.br/CRAN/"),
+  vsc.use_httpgd = TRUE,
+  vsc.str.max.level = 2,
+  vsc.viewer = TRUE
 )
 
 # SETUP RENV ----
@@ -14,7 +18,6 @@ if (!require("renv", quietly = TRUE)) {
   renv::activate()
 }
 
-
 # SETUP DIRETÓRIOS ----
 DIR_PROJECT <- getwd()
 # [1] "C:/Users/cesar.oliveira/github/projetos/analisedados/captura-cnpj"
@@ -25,7 +28,7 @@ DIR_PACKAGES <- .libPaths(renv::paths$library())
 # SETUP PACKAGES ----
 PACKAGES <- c(
   "dplyr", "ggplot2", "readr", "readxl", "fs", "janitor", "writexl", "purrr",
-  "forcats", "tibble", "lubridate", "tidyr", "stringr", "vroom", "utils"
+  "forcats", "tibble", "lubridate", "tidyr", "stringr", "vroom", "utils", "httpgd", "usethis", "languageserver"
 )
 
 # Instala e carrega os pacotes usando {renv}
@@ -50,3 +53,7 @@ for (pkg in PACKAGES) {
 # use("utils", c("write.table"))
 # use("readxl", c("read_xlsx"))
 # use("stringr", c("str_replace_all", "str_remove", "str_detect"))
+# use("fs", c("dir_create", "file_copy", "file_move", "file_delete"))
+# use("purrr", c("map", "map_df", "map_chr"))
+# use("lubridate", c("ymd", "dmy", "mdy", "year", "month", "day"))
+# use("vroom", c("vroom"))
