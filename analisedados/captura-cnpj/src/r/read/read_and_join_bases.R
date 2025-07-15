@@ -70,7 +70,8 @@ base_mcti_request <-
       uf.parceira %in% c("AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE") ~ "Nordeste",
       uf.parceira %in% c("AC", "AP", "AM", "PA", "RO", "RR", "TO") ~ "Norte",
       TRUE ~ "EXTERIOR"
-    )
+    ),
+    valor = as.numeric(str_trim(format(valor, decimal.mark = ",", nsmall = 2)))
   )
 
 
