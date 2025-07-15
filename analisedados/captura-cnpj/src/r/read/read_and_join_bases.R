@@ -69,9 +69,10 @@ base_mcti_request <-
       uf.parceira %in% c("DF", "GO", "MT", "MS") ~ "Centro-Oeste",
       uf.parceira %in% c("AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE") ~ "Nordeste",
       uf.parceira %in% c("AC", "AP", "AM", "PA", "RO", "RR", "TO") ~ "Norte",
-      TRUE ~ "Outra Região"
+      TRUE ~ "EXTERIOR"
     )
   )
+
 
 # SALVANDO BASE COMPLETA ----
 
@@ -99,7 +100,3 @@ utils::write.table(
   quote = TRUE,
   fileEncoding = "UTF-8"
 )
-
-
-
-
