@@ -1,34 +1,3 @@
-# SETUP PROJETO ----
-source("config/setup.R")
-# Configurando outros repositórios.
-# source("src/r/manipul/join_base_and_request.R")
-# source("src/r/manipul/manipulacao.R")
-
-# TEMAS ----
-source("src/r/graficos/temas.R")
-
-# SETUP PACKAGES ----
-
-
-# FUNCTIONS ----
-theme_custom <- function(plot, title, title.y) {
-  plot +
-    ggplot2::labs(
-      title = title,
-      y = title.y
-    ) +
-    ggplot2::theme(
-      axis.title.y = ggplot2::element_blank(),
-      panel.grid.major = ggplot2::element_blank(),
-      panel.grid.major.x = ggplot2::element_line(
-        color = "#c0bebe", linetype = "dashed"
-        ),
-      panel.grid.minor = ggplot2::element_blank(),
-      panel.background = ggplot2::element_blank(),
-      axis.ticks.y = ggplot2::element_blank(),
-      axis.line.x.bottom = ggplot2::element_line(color = "black")
-    )
-}
 
 # GRÁFICOS ----
 
