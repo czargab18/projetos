@@ -1,4 +1,0 @@
-# TODOS OS SCRIPT EM UM ÚNICO LUGAR PARA RODAR DE FORMA RÁPIDA
-
-# SETUP PROJETO ----
-source("config/setup.R")
