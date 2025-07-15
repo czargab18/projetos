@@ -17,8 +17,8 @@ base_mcti_request |>
   )
 
 
-# plot_tipo_dispendio <-
-base_mcti_request |>
+plot_tipo_dispendio <-
+  base_mcti_request |>
   dplyr::select(tipo_dispendio, cnpj_dispendio) |>
   dplyr::group_by(tipo_dispendio) |>
   dplyr::summarise(cnpj_dispendio = list(cnpj_dispendio)) |>
@@ -39,7 +39,7 @@ base_mcti_request |>
     x = "Tipos de Parcerias",
     y = "Quantidade de Projetos"
   ) +
-  ggplot2::geom_text(aes(label = quantidade), color = "#000000", size = 4) +
+  ggplot2::geom_text(aes(label = quantidade), color = "#000000", size = 4, hjust = -0.05) +
   tema()
 
 
