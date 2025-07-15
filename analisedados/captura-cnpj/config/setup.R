@@ -2,7 +2,7 @@
 
 options(
   stringsAsFactors = FALSE,
-  repos = c(CRAN = "https://vps.fmvz.usp.br/CRAN/"),
+  repos = c(CRAN = "https://cran.r-project.org/"),
   vsc.use_httpgd = TRUE,
   vsc.str.max.level = 2,
   vsc.viewer = TRUE
@@ -28,7 +28,7 @@ DIR_PACKAGES <- .libPaths(renv::paths$library())
 # SETUP PACKAGES ----
 PACKAGES <- c(
   "dplyr", "ggplot2", "readr", "readxl", "fs", "janitor", "writexl", "purrr",
-  "forcats", "tibble", "lubridate", "tidyr", "stringr", "vroom", "utils", "httpgd", "usethis", "languageserver"
+  "forcats", "tibble", "lubridate", "tidyr", "stringr", "vroom", "utils", "usethis", "languageserver"
 )
 
 # Instala e carrega os pacotes usando {renv}
