@@ -1,5 +1,5 @@
 # SETUP PROJETO ----
-# source("config/setup.R")
+source("config/setup.R")
 
 
 # SETUP IMPORT base_mcti ----
@@ -12,10 +12,12 @@ base_mcti <-
   janitor::clean_names() |>
   # formata caracteres, como ";" e "-"
   dplyr::mutate(
-      servico = stringr::str_replace_all(servico, "\\s*-\\s*", " "),
-      servico = stringr::str_replace_all(servico, "\\s*[\\-–]\\s*", ". "),
-      servico = stringr::str_replace_all(servico, ";\\s*", ". ")
+    servico = stringr::str_replace_all(servico, "\\s*-\\s*", " "),
+    servico = stringr::str_replace_all(servico, "\\s*[\\-–]\\s*", ". "),
+    servico = stringr::str_replace_all(servico, ";\\s*", ". ")
   )
+# SETUP BASE MCTI ----
+print(paste("Base MCTI carregada com", nrow(base_mcti), "linhas."))
 
 # SALVANDO ----
 ## SALVANDO BASE DE DADOS COM OS CNPJS QUE ATENDEM AS CONDIÇÕES
