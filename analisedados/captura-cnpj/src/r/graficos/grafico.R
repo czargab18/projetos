@@ -316,3 +316,53 @@ table_top10_uf_dispendio <-
     align = "left",
     columns = c("UF Parceira", "Valor Total (R$)")
   )
+
+gt::gtsave(
+  table_top10_uf_dispendio,
+  filename = "resultado/tabelas/top10_uf_dispendio.png"
+)
+
+# Tabela 10 Universidade ----
+table_top10_universidade <-
+  base_mcti_request |>
+  dplyr::filter(
+    tipo_dispendio %in%
+      c("Instituição de Pesquisa", "Universidades") &
+      uf_comp != "EXTERIOR"
+  ) |>
+  dplyr::select(uf_comp, valor) |>
+  dplyr::group_by(uf_comp) |>
+  dplyr::summarise(valor = sum(valor, na.rm = TRUE)) |>
+  dplyr::mutate(
+    uf_comp = factor(
+      uf_comp,
+      levels = uf_comp[order(valor)]
+    )
+  ) |>
+  dplyr::rename(
+    "UF Parceira" = uf_comp,
+    "Valor Total (R$)" = valor
+  ) |>
+  dplyr::arrange(desc(`Valor Total (R$)`)) |>
+  dplyr::slice_head(n = 10) |>
+  gt::gt() |>
+  gt::tab_header(
+    title = "Investimento em P,D&I por Universidade"
+  ) |>
+  gt::cols_label(
+    "UF Parceira" = "UF Parceira",
+    "Valor Total (R$)" = "Valor Total (R$)"
+  ) |>
+  gt::fmt_currency(
+    columns = "Valor Total (R$)",
+    currency = "BRL"
+  ) |>
+  gt::cols_align(
+    align = "left",
+    columns = c("UF Parceira", "Valor Total (R$)")
+  )
+
+gt::gtsave(
+  table_top10_universidade,
+  filename = "resultado/tabelas/top10_universidade.png"
+)
