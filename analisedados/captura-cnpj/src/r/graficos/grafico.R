@@ -278,26 +278,28 @@ ggplot2::ggsave(
 )
 
 # TABELAS TOP 10 ----
-base_mcti_request |>
+table_top10_uf_dispendio <-
+  base_mcti_request |>
   dplyr::filter(
     tipo_dispendio %in%
       c("Instituição de Pesquisa", "Universidades") &
-      regiao_dispendio != "EXTERIOR"
+      uf_comp != "EXTERIOR"
   ) |>
-  dplyr::select(uf.parceira, valor) |>
-  dplyr::group_by(uf.parceira) |>
+  dplyr::select(uf_comp, valor) |>
+  dplyr::group_by(uf_comp) |>
   dplyr::summarise(valor = sum(valor, na.rm = TRUE)) |>
   dplyr::mutate(
-    uf.parceira = factor(
-      uf.parceira,
-      levels = uf.parceira[order(valor)]
+    uf_comp = factor(
+      uf_comp,
+      levels = uf_comp[order(valor)]
     )
   ) |>
   dplyr::rename(
-    "UF Parceira" = uf.parceira,
+    "UF Parceira" = uf_comp,
     "Valor Total (R$)" = valor
   ) |>
   dplyr::arrange(desc(`Valor Total (R$)`)) |>
+  dplyr::slice_head(n = 10) |>
   gt::gt() |>
   gt::tab_header(
     title = "Investimento em P,D&I por União Federativa"
@@ -309,4 +311,8 @@ base_mcti_request |>
   gt::fmt_currency(
     columns = "Valor Total (R$)",
     currency = "BRL"
+  ) |>
+  gt::cols_align(
+    align = "left",
+    columns = c("UF Parceira", "Valor Total (R$)")
   )
