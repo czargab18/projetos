@@ -377,8 +377,9 @@ base_mcti_request |>
       tipo_dispendio != "EXTERIOR"
   ) |>
   dplyr::select(
-    razao_social_dispendio, cnpj_dispendio
-  )  |>
+    razao_social_dispendio,
+    cnpj_dispendio
+  ) |>
   dplyr::summarise(qtd_cnpjs_unicos = dplyr::n_distinct(cnpj_dispendio)) |>
   dplyr::arrange(desc(qtd_cnpjs_unicos)) |>
   gt::gt() |>
@@ -397,4 +398,63 @@ base_mcti_request |>
 gt::gtsave(
   table_cnpjs_unicos_tipodispendio,
   filename = "resultado/tabelas/cnpjs_unicos_tipodispendio.png"
+)
+
+# TABELA: Top 10 Universidades ou Institutos Federais por quantidade de CNPJs únicos ----
+# table_top10_universidades <-
+base_mcti_request |>
+  dplyr::filter(
+    tipo_dispendio %in%
+      c("Instituição de Pesquisa", "Universidades") &
+      tipo_dispendio != "EXTERIOR"
+  ) |>
+  dplyr::group_by(razao_social_dispendio) |>
+  dplyr::select(razao_social_dispendio, cnpj_dispendio) |>
+  dplyr::summarise(qtd_cnpjs_unicos = dplyr::n_distinct(cnpj_dispendio)) |>
+  dplyr::arrange(desc(qtd_cnpjs_unicos)) |>
+  dplyr::slice_head(n = 10) |>
+  gt::gt() |>
+  gt::tab_header(
+    title = "Top 10 Universidades/Institutos Federais por CNPJs Únicos"
+  ) |>
+  gt::cols_label(
+    razao_social_dispendio = "Universidade/Instituto",
+    qtd_cnpjs_unicos = "Qtd. CNPJs Únicos"
+  ) |>
+  gt::cols_align(
+    align = "left",
+    columns = c("Universidade/Instituto")
+  )
+
+gt::gtsave(
+  table_top10_universidades,
+  filename = "resultado/tabelas/top10_universidades_cnpjs.png"
+)
+
+# TABELA: Top 10 Instituições por quantidade de CNPJs únicos ----
+# table_top10_instituicoes <-
+  base_mcti_request |>
+  dplyr::filter(
+    tipo_dispendio != "EXTERIOR"
+  ) |>
+  dplyr::group_by(razao_social_dispendio) |>
+  dplyr::summarise(qtd_cnpjs_unicos = dplyr::n_distinct(cnpj_dispendio)) |>
+  dplyr::arrange(desc(qtd_cnpjs_unicos)) |>
+  dplyr::slice_head(n = 10) |>
+  gt::gt() |>
+  gt::tab_header(
+    title = "Top 10 Instituições por CNPJs Únicos"
+  ) |>
+  gt::cols_label(
+    razao_social_dispendio = "Instituição",
+    qtd_cnpjs_unicos = "Qtd. CNPJs Únicos"
+  ) |>
+  gt::cols_align(
+    align = "left",
+    columns = c("Instituição")
+  )
+
+gt::gtsave(
+  table_top10_instituicoes,
+  filename = "resultado/tabelas/top10_instituicoes_cnpjs.png"
 )
