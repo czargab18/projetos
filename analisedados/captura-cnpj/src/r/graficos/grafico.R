@@ -323,28 +323,22 @@ gt::gtsave(
 )
 
 # Tabela 10 Universidade ----
-table_top10_universidade <-
+table_top10_tipodispendio <-
   base_mcti_request |>
-  dplyr::filter(
-    tipo_dispendio %in%
-      c("Instituição de Pesquisa", "Universidades") &
-      uf_comp != "EXTERIOR"
-  ) |>
-  dplyr::select(uf_comp, valor) |>
-  dplyr::group_by(uf_comp) |>
+  dplyr::select(tipo_dispendio, valor) |>
+  dplyr::group_by(tipo_dispendio) |>
   dplyr::summarise(valor = sum(valor, na.rm = TRUE)) |>
   dplyr::mutate(
-    uf_comp = factor(
-      uf_comp,
-      levels = uf_comp[order(valor)]
+    tipo_dispendio = factor(
+      tipo_dispendio,
+      levels = tipo_dispendio[order(valor)]
     )
   ) |>
   dplyr::rename(
-    "UF Parceira" = uf_comp,
+    "UF Parceira" = tipo_dispendio,
     "Valor Total (R$)" = valor
   ) |>
   dplyr::arrange(desc(`Valor Total (R$)`)) |>
-  dplyr::slice_head(n = 10) |>
   gt::gt() |>
   gt::tab_header(
     title = "Investimento em P,D&I por Universidade"
@@ -360,9 +354,28 @@ table_top10_universidade <-
   gt::cols_align(
     align = "left",
     columns = c("UF Parceira", "Valor Total (R$)")
+  ) |>
+  gt::tab_style(
+    style = gt::cell_text(weight = "bold"),
+    locations = gt::cells_body(
+      columns = "UF Parceira",
+      rows = `UF Parceira` %in% c("Instituição de Pesquisa", "Universidades")
+    )
   )
 
 gt::gtsave(
-  table_top10_universidade,
-  filename = "resultado/tabelas/top10_universidade.png"
+  table_top10_tipodispendio,
+  filename = "resultado/tabelas/top10_tipodispendio.png"
 )
+
+# TABELAS: top 10 universidade que mais aparecem em projetos de P,D&I ----
+
+base_mcti_request |>
+  dplyr::filter(
+    tipo_dispendio %in%
+      c("Instituição de Pesquisa", "Universidades") &
+      tipo_dispendio != "EXTERIOR"
+  ) |>
+  dplyr::select(
+    tipo_dispendio, cnpj_dispendio
+  )
