@@ -237,3 +237,6 @@ ggplot2::ggsave(
   units = "in",
   limitsize = FALSE
 )
+
+# TABELAS TOP 10 ----
+base_mcti_request |>

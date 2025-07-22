@@ -74,6 +74,8 @@ base_mcti_request <-
     valor = as.numeric(str_trim(format(valor, decimal.mark = ",", nsmall = 2)))
   )
 
+# MENSAGEM DE CARREGAMENTO ----
+print(paste("Base MCTI + Requisição carregada com", nrow(base_mcti_request), "linhas."))
 
 # SALVANDO BASE COMPLETA ----
 
