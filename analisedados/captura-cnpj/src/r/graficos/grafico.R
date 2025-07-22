@@ -39,7 +39,12 @@ plot_tipo_dispendio <-
     title = "Tipos de Parcerias",
     y = "Quantidade de Projetos"
   ) +
-  ggplot2::geom_text(aes(label = quantidade), color = "#000000", size = 4, hjust = 1) +
+  ggplot2::geom_text(
+    aes(label = quantidade),
+    color = "#000000",
+    size = 4,
+    hjust = 1
+  ) +
   tema()
 
 ggplot2::ggsave(
@@ -49,7 +54,7 @@ ggplot2::ggsave(
   height = 6,
   dpi = 300,
   units = "in",
-  limitsize =  FALSE
+  limitsize = FALSE
 )
 
 # GRÁFICO:Unidade federativas das ICTs ----
@@ -78,7 +83,12 @@ plot_uf_dispendio <-
     title = "União Federativa das ICTS em projetos de P,D&I",
     y = "Quantidade de Projetos"
   ) +
-  ggplot2::geom_text(aes(label = quantidade), color = "#000000", size = 4, hjust = -0.05) +
+  ggplot2::geom_text(
+    aes(label = quantidade),
+    color = "#000000",
+    size = 4,
+    hjust = -0.05
+  ) +
   tema()
 
 ggplot2::ggsave(
@@ -93,7 +103,8 @@ ggplot2::ggsave(
 plot_regiao_dispendio <-
   base_mcti_request |>
   dplyr::filter(
-    tipo_dispendio %in% c("Instituição de Pesquisa", "Universidades") &
+    tipo_dispendio %in%
+      c("Instituição de Pesquisa", "Universidades") &
       regiao_dispendio != "EXTERIOR"
   ) |>
   dplyr::select(regiao_dispendio, cnpj_dispendio) |>
@@ -116,7 +127,12 @@ plot_regiao_dispendio <-
     title = "Região das ICTs em projetos de P,D&I",
     y = "Quantidade de Projetos"
   ) +
-  ggplot2::geom_text(aes(label = quantidade), color = "#ffffff", size = 4, hjust = 1.2) +
+  ggplot2::geom_text(
+    aes(label = quantidade),
+    color = "#ffffff",
+    size = 4,
+    hjust = 1.2
+  ) +
   tema()
 
 ggplot2::ggsave(
@@ -126,12 +142,12 @@ ggplot2::ggsave(
   height = 6,
   dpi = 300,
   units = "in",
-  limitsize =  FALSE
+  limitsize = FALSE
 )
 
 # GRÁFICO: valor total por região ----
 plot_tipo_dispendio <-
-base_mcti_request |>
+  base_mcti_request |>
   dplyr::select(tipo_dispendio, valor) |>
   dplyr::group_by(tipo_dispendio) |>
   dplyr::summarise(valor = sum(valor, na.rm = TRUE)) |>
@@ -145,12 +161,19 @@ base_mcti_request |>
   ggplot2::geom_bar(stat = "identity") +
   ggplot2::coord_flip() +
   ggplot2::scale_y_continuous(labels = scales::comma) +
-  ggplot2::scale_x_discrete(limits = rev(levels(base_mcti_request$tipo_dispendio))) +
+  ggplot2::scale_x_discrete(
+    limits = rev(levels(base_mcti_request$tipo_dispendio))
+  ) +
   ggplot2::labs(
     title = "Região das ICTs e Universidades em projetos de P,D&I",
     y = "Valor Total (em milhões de reais)"
   ) +
-  ggplot2::geom_text(aes(label = scales::comma(valor)), color = "#ffffff", size = 4, hjust = 1.1) +
+  ggplot2::geom_text(
+    aes(label = scales::comma(valor)),
+    color = "#ffffff",
+    size = 4,
+    hjust = 1.1
+  ) +
   tema()
 
 ggplot2::ggsave(
@@ -160,15 +183,16 @@ ggplot2::ggsave(
   height = 6,
   dpi = 300,
   units = "in",
-  limitsize =  FALSE
+  limitsize = FALSE
 )
 
 # GRÁFICO: VALOR TOTAL POR REGIÃO ----
 
 plot_valor_regiao_dispendio <-
-base_mcti_request |>
+  base_mcti_request |>
   dplyr::filter(
-    tipo_dispendio %in% c("Instituição de Pesquisa", "Universidades") &
+    tipo_dispendio %in%
+      c("Instituição de Pesquisa", "Universidades") &
       regiao_dispendio != "EXTERIOR"
   ) |>
   dplyr::select(regiao_dispendio, valor) |>
@@ -184,12 +208,19 @@ base_mcti_request |>
   ggplot2::geom_bar(stat = "identity") +
   ggplot2::coord_flip() +
   ggplot2::scale_y_continuous(labels = scales::comma) +
-  ggplot2::scale_x_discrete(limits = rev(levels(base_mcti_request$regiao_dispendio))) +
+  ggplot2::scale_x_discrete(
+    limits = rev(levels(base_mcti_request$regiao_dispendio))
+  ) +
   ggplot2::labs(
     title = "Região das ICTs e Universidades em projetos de P,D&I",
     y = "Valor Total (em milhões de reais)"
   ) +
-  ggplot2::geom_text(aes(label = scales::comma(valor)), color = "#000000", size = 4, hjust = 1.1) +
+  ggplot2::geom_text(
+    aes(label = scales::comma(valor)),
+    color = "#000000",
+    size = 4,
+    hjust = 1.1
+  ) +
   tema()
 
 ggplot2::ggsave(
@@ -204,7 +235,8 @@ ggplot2::ggsave(
 plot_valor_uf_dispendio <-
   base_mcti_request |>
   dplyr::filter(
-    tipo_dispendio %in% c("Instituição de Pesquisa", "Universidades") &
+    tipo_dispendio %in%
+      c("Instituição de Pesquisa", "Universidades") &
       regiao_dispendio != "EXTERIOR"
   ) |>
   dplyr::select(uf.parceira, valor) |>
@@ -220,12 +252,19 @@ plot_valor_uf_dispendio <-
   ggplot2::geom_bar(stat = "identity") +
   ggplot2::coord_flip() +
   ggplot2::scale_y_continuous(labels = scales::comma) +
-  ggplot2::scale_x_discrete(limits = rev(levels(base_mcti_request$uf.parceira))) +
+  ggplot2::scale_x_discrete(
+    limits = rev(levels(base_mcti_request$uf.parceira))
+  ) +
   ggplot2::labs(
     title = "União Federativa das ICTS em projetos de P,D&I",
     y = "Valor Total (em milhões de reais)"
   ) +
-  ggplot2::geom_text(aes(label = scales::comma(valor)), color = "#000000", size = 4, hjust = 0.5) +
+  ggplot2::geom_text(
+    aes(label = scales::comma(valor)),
+    color = "#000000",
+    size = 4,
+    hjust = 0.5
+  ) +
   tema()
 
 ggplot2::ggsave(
@@ -240,3 +279,17 @@ ggplot2::ggsave(
 
 # TABELAS TOP 10 ----
 base_mcti_request |>
+  dplyr::filter(
+    tipo_dispendio %in%
+      c("Instituição de Pesquisa", "Universidades") &
+      regiao_dispendio != "EXTERIOR"
+  ) |>
+  dplyr::select(uf.parceira, valor) |>
+  dplyr::group_by(uf.parceira) |>
+  dplyr::summarise(valor = sum(valor, na.rm = TRUE)) |>
+  dplyr::mutate(
+    uf.parceira = factor(
+      uf.parceira,
+      levels = uf.parceira[order(valor)]
+    )
+  )
