@@ -67,15 +67,50 @@ base_mcti_request <-
       uf.parceira %in% c("SP", "RJ", "MG", "ES") ~ "Sudeste",
       uf.parceira %in% c("PR", "SC", "RS") ~ "Sul",
       uf.parceira %in% c("DF", "GO", "MT", "MS") ~ "Centro-Oeste",
-      uf.parceira %in% c("AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE") ~ "Nordeste",
+      uf.parceira %in% c("AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE") ~
+        "Nordeste",
       uf.parceira %in% c("AC", "AP", "AM", "PA", "RO", "RR", "TO") ~ "Norte",
       TRUE ~ "EXTERIOR"
+    ),
+    uf_comp = dplyr::case_when(
+      uf.parceira == "AC" ~ "Acre",
+      uf.parceira == "AL" ~ "Alagoas",
+      uf.parceira == "AP" ~ "Amapá",
+      uf.parceira == "AM" ~ "Amazonas",
+      uf.parceira == "BA" ~ "Bahia",
+      uf.parceira == "CE" ~ "Ceará",
+      uf.parceira == "DF" ~ "Distrito Federal",
+      uf.parceira == "ES" ~ "Espírito Santo",
+      uf.parceira == "GO" ~ "Goiás",
+      uf.parceira == "MA" ~ "Maranhão",
+      uf.parceira == "MT" ~ "Mato Grosso",
+      uf.parceira == "MS" ~ "Mato Grosso do Sul",
+      uf.parceira == "MG" ~ "Minas Gerais",
+      uf.parceira == "PA" ~ "Pará",
+      uf.parceira == "PB" ~ "Paraíba",
+      uf.parceira == "PR" ~ "Paraná",
+      uf.parceira == "PE" ~ "Pernambuco",
+      uf.parceira == "PI" ~ "Piauí",
+      uf.parceira == "RJ" ~ "Rio de Janeiro",
+      uf.parceira == "RN" ~ "Rio Grande do Norte",
+      uf.parceira == "RS" ~ "Rio Grande do Sul",
+      uf.parceira == "RO" ~ "Rondônia",
+      uf.parceira == "RR" ~ "Roraima",
+      uf.parceira == "SC" ~ "Santa Catarina",
+      uf.parceira == "SP" ~ "São Paulo",
+      uf.parceira == "SE" ~ "Sergipe",
+      uf.parceira == "TO" ~ "Tocantins",
+      TRUE ~ NA_character_
     ),
     valor = as.numeric(str_trim(format(valor, decimal.mark = ",", nsmall = 2)))
   )
 
 # MENSAGEM DE CARREGAMENTO ----
-print(paste("Base MCTI + Requisição carregada com", nrow(base_mcti_request), "linhas."))
+print(paste(
+  "Base MCTI + Requisição carregada com",
+  nrow(base_mcti_request),
+  "linhas."
+))
 
 # SALVANDO BASE COMPLETA ----
 
@@ -103,3 +138,6 @@ utils::write.table(
   quote = TRUE,
   fileEncoding = "UTF-8"
 )
+
+
+

@@ -297,6 +297,7 @@ base_mcti_request |>
     "UF Parceira" = uf.parceira,
     "Valor Total (R$)" = valor
   ) |>
+  dplyr::arrange(desc(`Valor Total (R$)`)) |>
   gt::gt() |>
   gt::tab_header(
     title = "Investimento em P,D&I por União Federativa"
