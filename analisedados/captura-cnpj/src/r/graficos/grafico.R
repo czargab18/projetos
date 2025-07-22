@@ -292,4 +292,20 @@ base_mcti_request |>
       uf.parceira,
       levels = uf.parceira[order(valor)]
     )
+  ) |>
+  dplyr::rename(
+    "UF Parceira" = uf.parceira,
+    "Valor Total (R$)" = valor
+  ) |>
+  gt::gt() |>
+  gt::tab_header(
+    title = "Investimento em P,D&I por União Federativa"
+  ) |>
+  gt::cols_label(
+    "UF Parceira" = "UF Parceira",
+    "Valor Total (R$)" = "Valor Total (R$)"
+  ) |>
+  gt::fmt_currency(
+    columns = "Valor Total (R$)",
+    currency = "BRL"
   )
