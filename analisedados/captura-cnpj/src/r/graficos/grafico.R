@@ -377,5 +377,24 @@ base_mcti_request |>
       tipo_dispendio != "EXTERIOR"
   ) |>
   dplyr::select(
-    tipo_dispendio, cnpj_dispendio
+    razao_social_dispendio, cnpj_dispendio
+  )  |>
+  dplyr::summarise(qtd_cnpjs_unicos = dplyr::n_distinct(cnpj_dispendio)) |>
+  dplyr::arrange(desc(qtd_cnpjs_unicos)) |>
+  gt::gt() |>
+  gt::tab_header(
+    title = "Quantidade de CNPJs únicos por Tipo de Dispêndio"
+  ) |>
+  gt::cols_label(
+    tipo_dispendio = "Tipo de Dispêndio",
+    qtd_cnpjs_unicos = "Qtd. CNPJs Únicos"
+  ) |>
+  gt::cols_align(
+    align = "left",
+    columns = c("Tipo de Dispêndio")
   )
+
+gt::gtsave(
+  table_cnpjs_unicos_tipodispendio,
+  filename = "resultado/tabelas/cnpjs_unicos_tipodispendio.png"
+)
