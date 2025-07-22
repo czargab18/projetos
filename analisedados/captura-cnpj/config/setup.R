@@ -29,8 +29,25 @@ DIR_PACKAGES <- .libPaths(renv::paths$library())
 
 # SETUP PACKAGES ----
 PACKAGES <- c(
-  "dplyr", "ggplot2", "readr", "readxl", "fs", "janitor", "writexl", "purrr",
-  "forcats", "tibble", "lubridate", "tidyr", "stringr", "vroom", "utils", "usethis", "languageserver"
+  "dplyr",
+  "ggplot2",
+  "readr",
+  "readxl",
+  "fs",
+  "janitor",
+  "writexl",
+  "purrr",
+  "forcats",
+  "tibble",
+  "lubridate",
+  "tidyr",
+  "stringr",
+  "vroom",
+  "utils",
+  "usethis",
+  "languageserver",
+  "gt",
+  "gtsummary"
 )
 
 # Instala e carrega os pacotes usando {renv}
