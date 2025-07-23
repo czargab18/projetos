@@ -1,14 +1,24 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {
-    "ghcr.io/devcontainers/features/r:1": {},
-    "ghcr.io/devcontainers/features/python:1": {}
+  "name": "R (Community)",
+  "build": {
+    "dockerfile": "Dockerfile"
   },
+  "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
   "customizations": {
     "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "r.rterm.linux": "/usr/local/bin/radian",
+        "r.bracketedPaste": true,
+        "workbench.colorTheme": "Night Owl"
+      },
       "extensions": [
-        "REditorSupport.r",
-        "ms-python.python"
+        "ikuyadeu.r",
+        "REditorSupport.r-lsp",
+        "coenraads.bracket-pair-colorizer-2",
+        "streetsidesoftware.code-spell-checker",
+        "eamodio.gitlens",
+        "sdras.night-owl"
       ]
     }
   }
