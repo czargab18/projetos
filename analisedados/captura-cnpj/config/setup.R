@@ -4,7 +4,7 @@ options(
   stringsAsFactors = FALSE,
   scipen = 999,
   digits = 2,
-  repos = c(CRAN = "https://cran.r-project.org/"),
+#   repos = c(CRAN = "https://cran.r-project.org/"),
   vsc.use_httpgd = TRUE,
   vsc.str.max.level = 2,
   vsc.viewer = TRUE

@@ -7,23 +7,13 @@ source("src/r/read/read_and_join_bases.R")
 source("src/r/graficos/temas.R")
 
 # GRÁFICO: TIPOS DE PARCERIAS ----
-base_mcti_request |>
-  select(tipo_dispendio, cnpj_dispendio) |>
-  group_by(tipo_dispendio) |>
-  summarise(cnpjs = list(cnpj_dispendio)) |>
-  mutate(
-    cnpjs = map(cnpjs, unique),
-    qtd_cnpjs = lengths(cnpjs)
-  )
-
-
 plot_tipo_dispendio <-
   base_mcti_request |>
   dplyr::select(tipo_dispendio, cnpj_dispendio) |>
   dplyr::group_by(tipo_dispendio) |>
   dplyr::summarise(cnpj_dispendio = list(cnpj_dispendio)) |>
   dplyr::mutate(
-    cnpj_dispendio = map(cnpj_dispendio, unique),
+    cnpj_dispendio = purrr::map(cnpj_dispendio, unique),
     quantidade = lengths(cnpj_dispendio),
     tipo_dispendio = factor(
       tipo_dispendio,
@@ -67,7 +57,7 @@ plot_uf_dispendio <-
   dplyr::group_by(uf.parceira) |>
   dplyr::summarise(cnpj_dispendio = list(cnpj_dispendio)) |>
   dplyr::mutate(
-    cnpj_dispendio = map(cnpj_dispendio, unique),
+    cnpj_dispendio = purrr::map(cnpj_dispendio, unique),
     quantidade = lengths(cnpj_dispendio),
     uf.parceira = factor(
       uf.parceira,
@@ -111,7 +101,7 @@ plot_regiao_dispendio <-
   dplyr::group_by(regiao_dispendio) |>
   dplyr::summarise(cnpj_dispendio = list(cnpj_dispendio)) |>
   dplyr::mutate(
-    cnpj_dispendio = map(cnpj_dispendio, unique),
+    cnpj_dispendio = purrr::map(cnpj_dispendio, unique),
     quantidade = lengths(cnpj_dispendio),
     regiao_dispendio = factor(
       regiao_dispendio,
