@@ -398,15 +398,14 @@ gt::gtsave(
 # table_top10_universidades <-
 base_mcti_request |>
   dplyr::filter(
-    tipo_dispendio == "Universidades" &
-      tipo_dispendio != "EXTERIOR"
+    tipo_dispendio == "Universidades"
   ) |>
   dplyr::select(razao_social_dispendio, cnpj_dispendio, valor) |>
   dplyr::group_by(razao_social_dispendio) |>
   dplyr::summarise(
     qtd_cnpjs_unicos = dplyr::n_distinct(cnpj_dispendio),
     investimento = sum(valor, na.rm = TRUE)
-    ) |>
+  ) |>
   dplyr::arrange(desc(qtd_cnpjs_unicos)) |>
   dplyr::slice_head(n = 10) |>
   dplyr::rename(
@@ -419,12 +418,17 @@ base_mcti_request |>
     title = "Universidades com mais parcerias"
   ) |>
   gt::cols_label(
-    razao_social_dispendio = "Universidade/Instituto",
-    qtd_cnpjs_unicos = "Qtd. CNPJs Únicos"
+    "Universidade" = "Universidade",
+    "Quantidade" = "Quantidade",
+    "Investimento (R$)" = "Investimento (R$)"
+  ) |>
+  gt::fmt_currency(
+    columns = "Investimento (R$)",
+    currency = "BRL"
   ) |>
   gt::cols_align(
     align = "left",
-    columns = c("Universidade/Instituto")
+    columns = c("Universidade", "Quantidade", "Investimento (R$)")
   )
 
 gt::gtsave(
