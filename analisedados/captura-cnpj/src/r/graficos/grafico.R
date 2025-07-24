@@ -451,7 +451,7 @@ gt::gtsave(
     ) |>
     gt::cols_align(
       align = "left",
-      columns = c("Instituição")
+      columns = c("razao_social_dispendio")
     ) |>
     gt::fmt_currency(
       columns = "Valor Total (R$)",
