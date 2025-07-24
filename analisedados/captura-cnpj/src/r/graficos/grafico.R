@@ -1,6 +1,4 @@
 # CONFIGURAÇÕES INICIAIS ----
-#> configuração do projeto, pacotes e diretórios
-# source("config/setup.R") **script abaixo já carrega o setup.R**
 #> carregar e unir as bases de dados
 source("src/r/read/read_and_join_bases.R")
 #> carregar funções auxiliares para gráficos
@@ -413,11 +411,10 @@ base_mcti_request |>
   ) |>
   gt::gt() |>
   gt::tab_header(
-    title = "Universidades com mais parcerias"
+    title = "Universidades com mais Investimentos em P,D&I"
   ) |>
   gt::cols_label(
     "Universidade" = "Universidade",
-    "Quantidade" = "Quantidade",
     "Investimento (R$)" = "Investimento (R$)"
   ) |>
   gt::fmt_currency(
@@ -426,7 +423,7 @@ base_mcti_request |>
   ) |>
   gt::cols_align(
     align = "left",
-    columns = c("Universidade", "Quantidade", "Investimento (R$)")
+    columns = c("Universidade", "Investimento (R$)")
   )
 
 gt::gtsave(
