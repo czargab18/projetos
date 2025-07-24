@@ -4,7 +4,7 @@ options(
   stringsAsFactors = FALSE,
   scipen = 999,
   digits = 2,
-#   repos = c(CRAN = "https://cran.r-project.org/"),
+  #   repos = c(CRAN = "https://cran.r-project.org/"),
   vsc.use_httpgd = TRUE,
   vsc.str.max.level = 2,
   vsc.viewer = TRUE
@@ -52,10 +52,14 @@ PACKAGES <- c(
   "gtsummary"
 )
 
-# Instala e carrega os pacotes usando {renv}
+# Instala e carrega os pacotes usando park (mais eficiente) ou renv
 for (pkg in PACKAGES) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg)
+    if (requireNamespace("park", quietly = TRUE)) {
+      park::park(pkg)
+    } else {
+      install.packages(pkg)
+    }
     renv::snapshot(prompt = TRUE)
     library(pkg, character.only = TRUE)
   }
