@@ -400,17 +400,15 @@ base_mcti_request |>
   dplyr::filter(
     tipo_dispendio == "Universidades"
   ) |>
-  dplyr::select(razao_social_dispendio, cnpj_dispendio, valor) |>
+  dplyr::select(razao_social_dispendio, valor) |>
   dplyr::group_by(razao_social_dispendio) |>
   dplyr::summarise(
-    qtd_cnpjs_unicos = dplyr::n_distinct(cnpj_dispendio),
     investimento = sum(valor, na.rm = TRUE)
   ) |>
-  dplyr::arrange(desc(qtd_cnpjs_unicos)) |>
+  dplyr::arrange(desc(investimento)) |>
   dplyr::slice_head(n = 10) |>
   dplyr::rename(
     "Universidade" = razao_social_dispendio,
-    "Quantidade" = qtd_cnpjs_unicos,
     "Investimento (R$)" = investimento
   ) |>
   gt::gt() |>
