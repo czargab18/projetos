@@ -422,27 +422,41 @@ gt::gtsave(
 )
 
 # TABELA: Top 10 Instituições por quantidade de CNPJs únicos ----
-# table_top10_instituicoes <-
+  # table_top10_instituicoes <-
   base_mcti_request |>
-  dplyr::filter(
-    tipo_dispendio != "EXTERIOR"
-  ) |>
-  dplyr::group_by(razao_social_dispendio) |>
-  dplyr::summarise(qtd_cnpjs_unicos = dplyr::n_distinct(cnpj_dispendio)) |>
-  dplyr::arrange(desc(qtd_cnpjs_unicos)) |>
-  dplyr::slice_head(n = 10) |>
-  gt::gt() |>
-  gt::tab_header(
-    title = "Top 10 Instituições por CNPJs Únicos"
-  ) |>
-  gt::cols_label(
-    razao_social_dispendio = "Instituição",
-    qtd_cnpjs_unicos = "Qtd. CNPJs Únicos"
-  ) |>
-  gt::cols_align(
-    align = "left",
-    columns = c("Instituição")
-  )
+    dplyr::filter(
+      tipo_dispendio == "Universidades" &
+        tipo_dispendio != "EXTERIOR"
+    ) |>
+    dplyr::select(
+      razao_social_dispendio,
+      cnpj_dispendio,
+      valor
+    ) |>
+    dplyr::group_by(razao_social_dispendio) |>
+    dplyr::summarise(
+      qtd_cnpjs_unicos = dplyr::n_distinct(cnpj_dispendio),
+      valor_total = sum(valor, na.rm = TRUE)
+    ) |>
+    dplyr::arrange(desc(qtd_cnpjs_unicos)) |>
+    dplyr::slice_head(n = 10) |>
+    gt::gt() |>
+    gt::tab_header(
+      title = "Top 10 niversidades parceiras"
+    ) |>
+    gt::cols_label(
+      razao_social_dispendio = "Instituição",
+      qtd_cnpjs_unicos = "Qtd. CNPJs Únicos",
+      valor_total = "Valor Total (R$)"
+    ) |>
+    gt::cols_align(
+      align = "left",
+      columns = c("Instituição")
+    ) |>
+    gt::fmt_currency(
+      columns = "Valor Total (R$)",
+      currency = "BRL"
+    )
 
 gt::gtsave(
   table_top10_instituicoes,
