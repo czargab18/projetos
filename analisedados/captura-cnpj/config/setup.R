@@ -13,6 +13,7 @@ options(
 # SETUP RENV ----
 if (!require("renv", quietly = TRUE)) {
   install.packages("renv")
+  install.packages("park")
   print("Iniciando o RENV")
   renv::init()
 } else {
@@ -47,6 +48,7 @@ PACKAGES <- c(
   "usethis",
   "languageserver",
   "gt",
+  "webshot2",
   "gtsummary"
 )
 
